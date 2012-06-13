@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<topology.cell:Cell xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:topology.cell="http://www.ibm.com/websphere/appserver/schemas/5.0/topology.cell.xmi" xmi:id="Cell_1" name="E050_WAS6_INT01" cellDiscoveryProtocol="TCP" cellType="DISTRIBUTED">
+  <properties xmi:id="Property_1199341357566" name="com.ibm.websphere.management.application.sync.recycleappasv5" value="true" required="false"/>
+</topology.cell:Cell>

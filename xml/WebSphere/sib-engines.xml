@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sibresources:SIBMessagingEngine xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:sibresources="http://www.ibm.com/websphere/appserver/schemas/6.0/sibresources.xmi" xmi:id="SIBMessagingEngine_1152688584599" name="w60int01n01.STEST_Server-E050_WAS6_INT01_B1" uuid="7AEDB5CDD2B1F92B" initialState="STOPPED" busName="E050_WAS6_INT01_B1" busUuid="21ECBD5F8D87CB05" highMessageThreshold="50000">
+  <dataStore xmi:id="SIBDatastore_1152688584607" uuid="7B9E771B32AE50E9" dataSourceName="jdbc/db2db" schemaName="SIB_STEST_E050WAS6INT01"/>
+  <localizationPoints xmi:type="sibresources:SIBQueueLocalizationPoint" xmi:id="SIBQueueLocalizationPoint_1152688589412" identifier="_SYSTEM.Exception.Destination.w60int01n01.STEST_Server-E050_WAS6_INT01_B1@w60int01n01.STEST_Server-E050_WAS6_INT01_B1" uuid="2C8C1F367359FAC422557266" targetUuid="9C1E2736996BA1D0A223E7E6"/>
+  <localizationPoints xmi:type="sibresources:SIBTopicSpaceLocalizationPoint" xmi:id="SIBTopicSpaceLocalizationPoint_1152688590381" identifier="Default.Topic.Space@w60int01n01.STEST_Server-E050_WAS6_INT01_B1" uuid="98333C26418EAF8AC6F2ADCB" targetUuid="5B426F040377932CBD068218" highMessageThreshold="50000"/>
+</sibresources:SIBMessagingEngine>

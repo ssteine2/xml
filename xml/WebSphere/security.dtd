@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT security:Security EMPTY>
+<!ATTLIST security:Security
+	xmi:version CDATA #REQUIRED
+	xmlns:xmi CDATA #REQUIRED
+	xmlns:security CDATA #REQUIRED
+	xmi:id CDATA #REQUIRED
+	useDomainQualifiedUserNames ( true | false ) #REQUIRED
+	enabled ( true | false ) #REQUIRED
+	cacheTimeout CDATA #REQUIRED
+	issuePermissionWarning ( true | false ) #REQUIRED
+	activeProtocol CDATA #REQUIRED
+	enforceJava2Security ( true | false ) #REQUIRED
+>

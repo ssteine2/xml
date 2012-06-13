@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<namebindings:StringNameSpaceBinding
+	xmi:version="2.0"
+	xmlns:xmi="http://www.omg.org/XMI"
+	xmlns:namebindings="http://www.ibm.com/websphere/appserver/schemas/5.0/namebindings.xmi"
+	xmi:id="StringNameSpaceBinding_1153143489040"
+	name="sleepTime"
+	nameInNameSpace="sleepTime"
+	stringToBind="0" />

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT namebindings:StringNameSpaceBinding EMPTY>
+<!ATTLIST namebindings:StringNameSpaceBinding
+	xmi:version CDATA #REQUIRED
+	xmlns:xmi CDATA #REQUIRED
+	xmlns:namebindings CDATA #REQUIRED
+	xmi:id CDATA #REQUIRED
+	name CDATA #REQUIRED
+	nameInNameSpace CDATA #REQUIRED
+	stringToBind CDATA #REQUIRED
+>

@@ -1,0 +1,8 @@
+<x xmlns:xi="http://www.w3.org/2001/XInclude">
+  <xi:include href="server.xml"/>
+  <xi:import href="server.xml"/>
+  <xi:include href="resources.xml"/>
+  <xi:include href="namebindings.xml"/>
+  <xi:include href="security.xml"/>
+  <xi:include href="variables.xml"/>
+</x>

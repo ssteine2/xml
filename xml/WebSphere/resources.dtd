@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT classpath (#PCDATA)>
+<!ELEMENT connectionPool EMPTY>
+<!ATTLIST connectionPool
+	xmi:id CDATA #REQUIRED
+	connectionTimeout CDATA #IMPLIED
+	maxConnections CDATA #IMPLIED
+	minConnections CDATA #IMPLIED
+	reapTime CDATA #IMPLIED
+	unusedTimeout CDATA #IMPLIED
+	agedTimeout CDATA #IMPLIED
+	purgePolicy CDATA #IMPLIED
+>
+<!ELEMENT factories (propertySet?, connectionPool?, mapping?, sessionPool?)>
+<!ATTLIST factories
+	xmi:type CDATA #REQUIRED
+	xmi:id CDATA #REQUIRED
+	name CDATA #REQUIRED
+	jndiName CDATA #REQUIRED
+	authMechanismPreference CDATA #IMPLIED
+	XAEnabled CDATA #IMPLIED
+	queueManager CDATA #IMPLIED
+	host CDATA #IMPLIED
+	port CDATA #IMPLIED
+	channel CDATA #IMPLIED
+	transportType CDATA #IMPLIED
+	msgRetention CDATA #IMPLIED
+	persistence CDATA #IMPLIED
+	priority CDATA #IMPLIED
+	specifiedPriority CDATA #IMPLIED
+	expiry CDATA #IMPLIED
+	specifiedExpiry CDATA #IMPLIED
+	baseQueueName CDATA #IMPLIED
+	baseQueueManagerName CDATA #IMPLIED
+	useNativeEncoding CDATA #IMPLIED
+	integerEncoding CDATA #IMPLIED
+	decimalEncoding CDATA #IMPLIED
+	floatingPointEncoding CDATA #IMPLIED
+	targetClient CDATA #IMPLIED
+	queueManagerHost CDATA #IMPLIED
+	queueManagerPort CDATA #IMPLIED
+	serverConnectionChannelName CDATA #IMPLIED
+	userName CDATA #IMPLIED
+	password CDATA #IMPLIED
+	description CDATA #IMPLIED
+	authDataAlias CDATA #IMPLIED
+	statementCacheSize CDATA #IMPLIED
+	datasourceHelperClassname CDATA #IMPLIED
+	relationalResourceAdapter CDATA #IMPLIED
+>
+<!ELEMENT mapping EMPTY>
+<!ATTLIST mapping
+	xmi:id CDATA #REQUIRED
+	mappingConfigAlias CDATA #REQUIRED
+	authDataAlias CDATA #REQUIRED
+>
+<!ELEMENT nativepath (#PCDATA)>
+<!ELEMENT propertySet (resourceProperties+)>
+<!ATTLIST propertySet
+	xmi:id CDATA #REQUIRED
+>
+<!ELEMENT protocolProviders EMPTY>
+<!ATTLIST protocolProviders
+	xmi:id CDATA #REQUIRED
+	protocol CDATA #REQUIRED
+	classname CDATA #REQUIRED
+	type CDATA #REQUIRED
+>
+<!ELEMENT resourceProperties EMPTY>
+<!ATTLIST resourceProperties
+	xmi:id CDATA #REQUIRED
+	name CDATA #REQUIRED
+	type CDATA #REQUIRED
+	value CDATA #REQUIRED
+	description CDATA #REQUIRED
+	required (false | true) #IMPLIED
+>
+<!ELEMENT resources.j2c:J2CResourceAdapter (propertySet)>
+<!ATTLIST resources.j2c:J2CResourceAdapter
+	xmi:id CDATA #REQUIRED
+	name CDATA #REQUIRED
+	description CDATA #REQUIRED
+	archivePath CDATA #REQUIRED
+>
+<!ELEMENT resources.jdbc:JDBCProvider (classpath+, factories)>
+<!ATTLIST resources.jdbc:JDBCProvider
+	xmi:id CDATA #REQUIRED
+	name CDATA #REQUIRED
+	description CDATA #REQUIRED
+	implementationClassName CDATA #REQUIRED
+	xa (false | true) #REQUIRED
+>
+<!ELEMENT resources.jms:JMSProvider (classpath?, nativepath?, factories*)>
+<!ATTLIST resources.jms:JMSProvider
+	xmi:id CDATA #REQUIRED
+	name CDATA #REQUIRED
+	description CDATA #REQUIRED
+	externalInitialContextFactory CDATA #REQUIRED
+	externalProviderURL CDATA #REQUIRED
+>
+<!ELEMENT resources.mail:MailProvider (protocolProviders+)>
+<!ATTLIST resources.mail:MailProvider
+	xmi:id CDATA #REQUIRED
+	name CDATA #REQUIRED
+	description CDATA #REQUIRED
+>
+<!ELEMENT resources.url:URLProvider EMPTY>
+<!ATTLIST resources.url:URLProvider
+	xmi:id CDATA #REQUIRED
+	name CDATA #REQUIRED
+	streamHandlerClassName CDATA #REQUIRED
+	protocol CDATA #REQUIRED
+>
+<!ELEMENT sessionPool EMPTY>
+<!ATTLIST sessionPool
+	xmi:id CDATA #REQUIRED
+>
+<!ELEMENT xmi:XMI (resources.jms:JMSProvider+, resources.j2c:J2CResourceAdapter, resources.mail:MailProvider, resources.url:URLProvider, resources.jdbc:JDBCProvider+)>
+<!ATTLIST xmi:XMI
+	xmi:version CDATA #REQUIRED
+	xmlns:xmi CDATA #REQUIRED
+	xmlns:resources.j2c CDATA #REQUIRED
+	xmlns:resources.jdbc CDATA #REQUIRED
+	xmlns:resources.jms CDATA #REQUIRED
+	xmlns:resources.jms.mqseries CDATA #REQUIRED
+	xmlns:resources.mail CDATA #REQUIRED
+	xmlns:resources.url CDATA #REQUIRED
+>

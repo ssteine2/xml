@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process:Server xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:adminservice="http://www.ibm.com/websphere/appserver/schemas/5.0/adminservice.xmi" xmlns:applicationserver="http://www.ibm.com/websphere/appserver/schemas/5.0/applicationserver.xmi" xmlns:applicationserver.ejbcontainer="http://www.ibm.com/websphere/appserver/schemas/5.0/applicationserver.ejbcontainer.xmi" xmlns:applicationserver.ejbcontainer.messagelistener="http://www.ibm.com/websphere/appserver/schemas/5.0/applicationserver.ejbcontainer.messagelistener.xmi" xmlns:applicationserver.webcontainer="http://www.ibm.com/websphere/appserver/schemas/5.0/applicationserver.webcontainer.xmi" xmlns:loggingservice.ras="http://www.ibm.com/websphere/appserver/schemas/5.0/loggingservice.ras.xmi" xmlns:namingserver="http://www.ibm.com/websphere/appserver/schemas/5.0/namingserver.xmi" xmlns:orb="http://www.ibm.com/websphere/appserver/schemas/5.0/orb.xmi" xmlns:pmiservice="http://www.ibm.com/websphere/appserver/schemas/5.0/pmiservice.xmi" xmlns:process="http://www.ibm.com/websphere/appserver/schemas/5.0/process.xmi" xmlns:processexec="http://www.ibm.com/websphere/appserver/schemas/5.0/processexec.xmi" xmlns:traceservice="http://www.ibm.com/websphere/appserver/schemas/5.0/traceservice.xmi" xmi:id="Server_1078493424411" name="STEST_Server">
+  <stateManagement xmi:id="StateManageable_1078493424419" initialState="START"/>
+  <statisticsProvider xmi:id="StatisticsProvider_1078493424419" specification="com.ibm.orb=enabled"/>
+  <services xmi:type="pmiservice:PMIService" xmi:id="PMIService_1078493424419" enable="true" initialSpecLevel="beanModule=H:cacheModule=H:connectionPoolModule=H:j2cModule=H:jvmRuntimeModule=H:orbPerfModule=H:servletSessionsModule=H:systemModule=H:threadPoolModule=H:transactionModule=H:webAppModule=H:webServicesModule=H:wlmModule=H:wsgwModule=H"/>
+  <services xmi:type="adminservice:AdminService" xmi:id="AdminService_1078493424419" enable="true" standalone="false" preferredConnector="SOAPConnector_1078493424419">
+    <connectors xmi:type="adminservice:SOAPConnector" xmi:id="SOAPConnector_1078493424419">
+      <properties xmi:id="Property_1078493424419" name="sslConfig" value="E050_WAS5_INT02Manager/DefaultSSLSettings"/>
+    </connectors>
+    <connectors xmi:type="adminservice:RMIConnector" xmi:id="RMIConnector_1078493424419"/>
+  </services>
+  <services xmi:type="traceservice:TraceService" xmi:id="TraceService_1078493424420" enable="true" startupTraceSpecification="*=all=disabled" traceOutputType="SPECIFIED_FILE" traceFormat="BASIC" memoryBufferSize="8">
+    <traceLog xmi:id="TraceLog_1078493424420" fileName="${SERVER_ROOT}/work/logs/trace.log" rolloverSize="1000" maxNumberOfBackupFiles="1"/>
+  </services>
+  <services xmi:type="loggingservice.ras:RASLoggingService" xmi:id="RASLoggingService_1078493424420" enable="true" messageFilterLevel="AUDIT" enableCorrelationId="true">
+    <serviceLog xmi:id="ServiceLog_1078493424420" name="${LOG_ROOT}/activity.log" size="2" enabled="true"/>
+  </services>
+  <services xmi:type="orb:ObjectRequestBroker" xmi:id="ObjectRequestBroker_1078493424420" enable="true" requestTimeout="180" requestRetriesCount="1" requestRetriesDelay="0" connectionCacheMaximum="240" connectionCacheMinimum="100" commTraceEnabled="false" locateRequestTimeout="180" forceTunnel="never" noLocalCopies="false">
+    <properties xmi:id="Property_1078493424420" name="com.ibm.CORBA.enableLocateRequest" value="true"/>
+    <properties xmi:id="Property_1078493424421" name="com.ibm.CORBA.WSSSLServerSocketFactoryName" value="com.ibm.ws.security.orbssl.WSSSLServerSocketFactoryImpl"/>
+    <properties xmi:id="Property_1078493424422" name="com.ibm.CORBA.WSSSLClientSocketFactoryName" value="com.ibm.ws.security.orbssl.WSSSLClientSocketFactoryImpl"/>
+    <properties xmi:id="Property_1078493424423" name="com.ibm.CORBA.ConnectionInterceptorName" value="com.ibm.ISecurityLocalObjectBaseL13Impl.SecurityConnectionInterceptor"/>
+    <properties xmi:id="Property_1078493424424" name="com.ibm.CORBA.RasManager" value="com.ibm.websphere.ras.WsOrbRasManager"/>
+    <properties xmi:id="Property_1078493424425" name="javax.rmi.CORBA.UtilClass" value="com.ibm.ws.orb.WSUtilDelegateImpl"/>
+    <interceptors xmi:id="Interceptor_1078493424420" name="com.ibm.ejs.ras.RasContextSupport"/>
+    <interceptors xmi:id="Interceptor_1078493424421" name="com.ibm.ws.runtime.workloadcontroller.OrbWorkloadRequestInterceptor"/>
+    <interceptors xmi:id="Interceptor_1078493424422" name="com.ibm.ejs.jts.jts.ClientInterceptor"/>
+    <interceptors xmi:id="Interceptor_1078493424423" name="com.ibm.ejs.jts.jts.ServerInterceptor"/>
+    <interceptors xmi:id="Interceptor_1078493424424" name="com.ibm.ejs.jts.jts.TXIORInterceptor"/>
+    <interceptors xmi:id="Interceptor_1078493424425" name="com.ibm.ISecurityLocalObjectBaseL13Impl.SecurityComponentFactory"/>
+    <interceptors xmi:id="Interceptor_1078493424426" name="com.ibm.ISecurityLocalObjectBaseL13Impl.ServerRIWrapper"/>
+    <interceptors xmi:id="Interceptor_1078493424427" name="com.ibm.ISecurityLocalObjectBaseL13Impl.ClientRIWrapper"/>
+    <interceptors xmi:id="Interceptor_1078493424428" name="com.ibm.ISecurityLocalObjectBaseL13Impl.CSIClientRI"/>
+    <interceptors xmi:id="Interceptor_1078493424429" name="com.ibm.ISecurityLocalObjectBaseL13Impl.CSIServerRI"/>
+    <interceptors xmi:id="Interceptor_1078493424430" name="com.ibm.ws.wlm.client.WLMClientInitializer"/>
+    <interceptors xmi:id="Interceptor_1078493424431" name="com.ibm.ws.wlm.server.WLMServerInitializer"/>
+    <interceptors xmi:id="Interceptor_1078493424432" name="com.ibm.ws.activity.ActivityServiceServerInterceptor"/>
+    <interceptors xmi:id="Interceptor_1078493424433" name="com.ibm.ws.activity.ActivityIORInterceptor"/>
+    <interceptors xmi:id="Interceptor_1078493424434" name="com.ibm.debug.DebugPortableInterceptor"/>
+    <interceptors xmi:id="Interceptor_1078493424435" name="com.ibm.debug.olt.ivbtrjrt.OLT_RI"/>
+    <plugins xmi:id="ORBPlugin_1078493424422" name="com.ibm.ejs.jts.jts.JtsPlugin"/>
+    <plugins xmi:id="ORBPlugin_1078493424423" name="com.ibm.ws.orbimpl.transport.WSTransport"/>
+    <plugins xmi:id="ORBPlugin_1078493424424" name="com.ibm.ISecurityUtilityImpl.SecurityPropertyManager"/>
+    <plugins xmi:id="ORBPlugin_1078493424425" name="com.ibm.ws.orbimpl.WSORBPropertyManager"/>
+    <plugins xmi:id="ORBPlugin_1078493424426" name="com.ibm.ws.wlm.client.WLMClient"/>
+    <plugins xmi:id="ORBPlugin_1078493424427" name="com.ibm.ws.pmi.server.modules.OrbPerfModule"/>
+    <threadPool xmi:id="ThreadPool_1078493424423" minimumSize="10" maximumSize="50" inactivityTimeout="3500" isGrowable="false"/>
+  </services>
+  <errorStreamRedirect xmi:id="StreamRedirect_1078493424423" fileName="${SERVER_ROOT}/work/logs/SystemErr.log" rolloverType="TIME" maxNumberOfBackupFiles="30" rolloverSize="1" baseHour="24" rolloverPeriod="24" formatWrites="true" messageFormatKind="BASIC" suppressWrites="false" suppressStackTrace="false"/>
+  <outputStreamRedirect xmi:id="StreamRedirect_1078493424424" fileName="${SERVER_ROOT}/work/logs/SystemOut.log" rolloverType="TIME" maxNumberOfBackupFiles="30" rolloverSize="1" baseHour="24" rolloverPeriod="24" formatWrites="true" messageFormatKind="BASIC" suppressWrites="false" suppressStackTrace="false"/>
+  <components xmi:type="namingserver:NameServer" xmi:id="NameServer_1078493424423">
+    <stateManagement xmi:id="StateManageable_1078493424423" initialState="START"/>
+  </components>
+  <components xmi:type="applicationserver:ApplicationServer" xmi:id="ApplicationServer_1078493424423" name="STEST_Server" applicationClassLoaderPolicy="MULTIPLE">
+    <stateManagement xmi:id="StateManageable_1078493424424" initialState="START"/>
+    <services xmi:type="applicationserver:TransactionService" xmi:id="TransactionService_1078493424423" enable="false" transactionLogDirectory="${SERVER_ROOT}/tranlog" totalTranLifetimeTimeout="20" clientInactivityTimeout="60" enableLoggingForHeuristicReporting="false"/>
+    <services xmi:type="applicationserver:DynamicCache" xmi:id="DynamicCache_1078493424423" enable="true">
+      <cacheGroups xmi:id="ExternalCacheGroup_1078493424424" name="EsiInvalidator">
+        <members xmi:id="ExternalCacheGroupMember_1078493424424" address="localhost" adapterBeanName="com.ibm.websphere.servlet.cache.ESIInvalidatorServlet"/>
+      </cacheGroups>
+    </services>
+    <components xmi:type="applicationserver.webcontainer:WebContainer" xmi:id="WebContainer_1078493424424" enableServletCaching="false">
+      <services xmi:type="applicationserver.webcontainer:SessionManager" xmi:id="SessionManager_1078493424424" enable="true" enableUrlRewriting="false" enableCookies="true" enableSSLTracking="false" enableProtocolSwitchRewriting="false" sessionPersistenceMode="NONE" enableSecurityIntegration="false" allowSerializedSessionAccess="false" maxWaitTime="5" accessSessionOnTimeout="true">
+        <defaultCookieSettings xmi:id="Cookie_1078493424424" domain="" maximumAge="-1" secure="false"/>
+        <sessionDatabasePersistence xmi:id="SessionDatabasePersistence_1078493424424" datasourceJNDIName="jdbc/Sessions" userId="db2admin" password="{xor}Oz1tPjsyNjE=" db2RowSize="ROW_SIZE_4KB" tableSpaceName=""/>
+        <tuningParams xmi:id="TuningParams_1078493424424" usingMultiRowSchema="false" maxInMemorySessionCount="1000" allowOverflow="false" scheduleInvalidation="false" writeFrequency="TIME_BASED_WRITE" writeInterval="120" writeContents="ONLY_UPDATED_ATTRIBUTES" invalidationTimeout="30">
+          <invalidationSchedule xmi:id="InvalidationSchedule_1078493424424" firstHour="14" secondHour="2"/>
+        </tuningParams>
+      </services>
+      <transports xmi:type="applicationserver.webcontainer:HTTPTransport" xmi:id="HTTPTransport_1078493424424" sslEnabled="false">
+        <address xmi:id="EndPoint_1078493424293" host="" port="9080"/>
+      </transports>
+      <transports xmi:type="applicationserver.webcontainer:HTTPTransport" xmi:id="HTTPTransport_1078493424425" sslEnabled="true" sslConfig="E050_WAS5_INT02Manager/DefaultSSLSettings">
+        <address xmi:id="EndPoint_1078493424294" host="" port="9443"/>
+      </transports>
+      <threadPool xmi:id="ThreadPool_1078493424424" minimumSize="10" maximumSize="50" inactivityTimeout="3500" isGrowable="false"/>
+    </components>
+    <components xmi:type="applicationserver.ejbcontainer:EJBContainer" xmi:id="EJBContainer_1078493424425" passivationDirectory="${USER_INSTALL_ROOT}/temp" inactivePoolCleanupInterval="30000">
+      <stateManagement xmi:id="StateManageable_1078493424425" initialState="START"/>
+      <services xmi:type="applicationserver.ejbcontainer.messagelistener:MessageListenerService" xmi:id="MessageListenerService_1078493424425">
+        <properties xmi:id="Property_1112805233535" name="MAX.RECOVERY.RETRIES" value="5" required="false"/>
+        <properties xmi:id="Property_1112805252933" name="RECOVERY.RETRY.INTERVAL" value="10" required="false"/>
+        <properties xmi:id="Property_1112810655869" name="NON.ASF.RECEIVE.TIMEOUT" value="2000" required="false"/>
+        <listenerPorts xmi:id="ListenerPort_1078501611014" name="listener1" connectionFactoryJNDIName="jms/wasXaTestFactory1" destinationJNDIName="jms/wasXaTestQueue1" maxSessions="1" maxRetries="2" maxMessages="1">
+          <stateManagement xmi:id="StateManageable_1078501611014" initialState="STOP"/>
+        </listenerPorts>
+        <listenerPorts xmi:id="ListenerPort_1092307375230" name="listener2" connectionFactoryJNDIName="jms/wasXaTestFactory2" destinationJNDIName="jms/wasXaTestQueue2" maxSessions="1" maxRetries="3" maxMessages="1">
+          <stateManagement xmi:id="StateManageable_1092307375230" initialState="STOP"/>
+        </listenerPorts>
+        <threadPool xmi:id="ThreadPool_1078493424425" minimumSize="10" maximumSize="50" inactivityTimeout="3500" isGrowable="false"/>
+      </services>
+      <cacheSettings xmi:id="EJBCache_1078493424425" cleanupInterval="3000" cacheSize="2053"/>
+    </components>
+  </components>
+  <processDefinition xmi:type="processexec:JavaProcessDef" xmi:id="JavaProcessDef_1078493424425" executableName="${JAVA_HOME}/bin/java" workingDirectory="${SERVER_ROOT}/work" executableTargetKind="JAVA_CLASS" executableTarget="com.ibm.ws.runtime.WsServer">
+    <execution xmi:id="ProcessExecution_1078493424425" processPriority="20" umask="002" runAsUser="stest" runAsGroup="wasas" runInProcessGroup="0"/>
+    <ioRedirect xmi:id="OutputRedirect_1078493424425" stdoutFilename="${SERVER_ROOT}/work/logs/native_stdout.log" stderrFilename="${SERVER_ROOT}/work/logs/native_stderr.log"/>
+    <environment xmi:id="Property_1130247756612" name="IBM_HEAPDUMP" value="true"/>
+    <environment xmi:id="Property_1130247757276" name="IBM_HEAPDUMP_OUTOFMEMORY" value="false"/>
+    <monitoringPolicy xmi:id="MonitoringPolicy_1078493424425" maximumStartupAttempts="3" pingInterval="60" pingTimeout="300" autoRestart="true" nodeRestartState="PREVIOUS"/>
+    <jvmEntries xmi:id="JavaVirtualMachine_1078493424425" verboseModeClass="false" verboseModeGarbageCollection="true" verboseModeJNI="false" initialHeapSize="0" maximumHeapSize="256" runHProf="false" debugMode="false" debugArgs="-Djava.compiler=NONE -Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=7777" disableJIT="false">
+      <systemProperties xmi:id="Property_1100167283104" name="oracle.jdbc.Trace" value="false" required="false"/>
+      <systemProperties xmi:id="Property_1100167304924" name="oracle.jdbc.LogFile" value="oratrace.log" required="false"/>
+      <systemProperties xmi:id="Property_1130247757705" name="sun.net.inetaddr.ttl" value="60"/>
+    </jvmEntries>
+  </processDefinition>
+</process:Server>

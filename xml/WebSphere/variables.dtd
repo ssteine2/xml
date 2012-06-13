@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT entries EMPTY>
+<!ATTLIST entries
+	xmi:id CDATA #REQUIRED
+	symbolicName CDATA #REQUIRED
+	value CDATA #REQUIRED
+	description CDATA #IMPLIED
+>
+<!ELEMENT variables:VariableMap (entries+)>
+<!ATTLIST variables:VariableMap
+	xmi:version CDATA #REQUIRED
+	xmlns:xmi CDATA #REQUIRED
+	xmlns:variables CDATA #REQUIRED
+	xmi:id CDATA #REQUIRED
+>

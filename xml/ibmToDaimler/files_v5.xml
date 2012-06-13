@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ServerEntity>
+	<File>server_v5.xml</File>
+	<File>namebindings_v5.xml</File>
+	<File>libraries_v5.xml</File>
+	<File>resources_v5.xml</File>
+	<File>variables_v5.xml</File>
+</ServerEntity>

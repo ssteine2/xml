@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<libraries:Library xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:libraries="http://www.ibm.com/websphere/appserver/schemas/5.0/libraries.xmi" xmi:id="Library_1085488901970" name="lib" description="Directory to add to ARCON221 classpath for use with external java libraries">
+  <classPath>${WAS_INSTALL_ROOT}/config/appdata/arcon221/lib/xalan.jar</classPath>
+  <classPath>${WAS_INSTALL_ROOT}/config/appdata/arcon221/lib/xercesImpl.jar</classPath>
+  <classPath>${WAS_INSTALL_ROOT}/config/appdata/arcon221/lib/xml-apis.jar</classPath>
+</libraries:Library>

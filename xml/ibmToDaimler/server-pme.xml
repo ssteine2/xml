@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmeserver:PMEServerExtension
+	xmi:version="2.0"
+	xmlns:xmi="http://www.omg.org/XMI"
+	xmlns:pmeserver="http://www.ibm.com/websphere/appserver/schemas/5.0/pmeserver.xmi"
+	xmi:id="PMEServerExtension_1">
+	<activitySessionService
+		xmi:id="ActivitySessionService_1"
+		enable="false"
+		defaultTimeout="300" />
+	<workAreaService
+		xmi:id="WorkAreaService_1"
+		enable="false"
+		maxSendSize="10000"
+		maxReceiveSize="10000" />
+	<workManagerService
+		xmi:id="WorkManagerService_1"
+		enable="true" />
+	<i18nService
+		xmi:id="I18NService_1"
+		enable="false" />
+	<schedulerService
+		xmi:id="SchedulerService_1"
+		enable="true" />
+	<applicationProfileService
+		xmi:id="ApplicationProfileService_1"
+		enable="true" />
+	<objectPoolService
+		xmi:id="ObjectPoolService_1"
+		enable="false" />
+	<startupBeansService
+		xmi:id="StartupBeansService_1"
+		enable="true" />
+</pmeserver:PMEServerExtension>

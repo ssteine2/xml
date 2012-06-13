@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:multibroker="http://www.ibm.com/websphere/appserver/schemas/5.0/multibroker.xmi">
+  <multibroker:DataReplicationDomain xmi:id="DataReplicationDomain_1152601180028" name="STEST_Cluster">
+    <defaultDataReplicationSettings xmi:id="DataReplication_1152601180054"/>
+  </multibroker:DataReplicationDomain>
+  <multibroker:DataReplicationDomain xmi:id="DataReplicationDomain_1152702802087" name="STEST_Cluster_full">
+    <defaultDataReplicationSettings xmi:id="DataReplication_1152702802087" requestTimeout="5" encryptionType="NONE" numberOfReplicas="-1">
+      <partition xmi:id="DRSPartition_1152702802088" size="10" partitionOnEntry="false"/>
+      <serialization xmi:id="DRSSerialization_1152702802088" entrySerializationKind="BYTES" propertySerializationKind="BYTES"/>
+      <pooling xmi:id="DRSConnectionPool_1152702802088" size="10" poolConnections="false"/>
+    </defaultDataReplicationSettings>
+  </multibroker:DataReplicationDomain>
+  <multibroker:DataReplicationDomain xmi:id="DataReplicationDomain_1168451673606" name="STEST_Server">
+    <defaultDataReplicationSettings xmi:id="DataReplication_1168451673606" requestTimeout="5" encryptionType="NONE" numberOfReplicas="1">
+      <partition xmi:id="DRSPartition_1168451673606" size="10" partitionOnEntry="false"/>
+      <serialization xmi:id="DRSSerialization_1168451673606" entrySerializationKind="BYTES" propertySerializationKind="BYTES"/>
+      <pooling xmi:id="DRSConnectionPool_1168451673606" size="10" poolConnections="false"/>
+    </defaultDataReplicationSettings>
+  </multibroker:DataReplicationDomain>
+</xmi:XMI>

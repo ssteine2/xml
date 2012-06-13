@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ServerEntity>
+	<File>server.xml</File>
+	<File>server-pme.xml</File>
+	<File>namebindings.xml</File>
+	<File>libraries.xml</File>
+	<File>resources.xml</File>
+	<File>resources-pme.xml</File>
+	<File>variables.xml</File>
+</ServerEntity>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<libraries:Library xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:libraries="http://www.ibm.com/websphere/appserver/schemas/5.0/libraries.xmi" xmi:id="Library_1184653087568" name="lib">
+  <classPath>${USER_INSTALL_ROOT}/config/appdata/STEST_Server/commons-beanutils-1.7.0.jar</classPath>
+  <classPath>${USER_INSTALL_ROOT}/config/appdata/STEST_Server/commons-collections-3.1.jar</classPath>
+  <classPath>${USER_INSTALL_ROOT}/config/appdata/STEST_Server/commons-lang-2.3.jar</classPath>
+  <classPath>${USER_INSTALL_ROOT}/config/appdata/STEST_Server/myfaces-api-1.1.5.jar</classPath>
+  <classPath>${USER_INSTALL_ROOT}/config/appdata/STEST_Server/myfaces-impl-1.1.5.jar</classPath>
+  <classPath>${USER_INSTALL_ROOT}/config/appdata/STEST_Server/commons-digester-1.8.jar</classPath>
+</libraries:Library>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<libraries:Library xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:libraries="http://www.ibm.com/websphere/appserver/schemas/5.0/libraries.xmi" xmi:id="Library_1168422958440" name="myLib">
+  <classPath>${USER_INSTALL_ROOT}/config/appdata/lib1.jar</classPath>
+  <classPath>${USER_INSTALL_ROOT}/config/appdata/lib2.jar</classPath>
+  <classPath>${USER_INSTALL_ROOT}/config/appdata/lib3.jar</classPath>
+</libraries:Library>

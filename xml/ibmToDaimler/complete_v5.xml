@@ -1,0 +1,1213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebSphereServerConfig>
+	<process:Server
+		xmlns:process="http://www.ibm.com/websphere/appserver/schemas/5.0/process.xmi"
+		xmlns:xmi="http://www.omg.org/XMI"
+		xmlns:adminservice="http://www.ibm.com/websphere/appserver/schemas/5.0/adminservice.xmi"
+		xmlns:applicationserver="http://www.ibm.com/websphere/appserver/schemas/5.0/applicationserver.xmi"
+		xmlns:applicationserver.ejbcontainer="http://www.ibm.com/websphere/appserver/schemas/5.0/applicationserver.ejbcontainer.xmi"
+		xmlns:applicationserver.ejbcontainer.messagelistener="http://www.ibm.com/websphere/appserver/schemas/5.0/applicationserver.ejbcontainer.messagelistener.xmi"
+		xmlns:applicationserver.webcontainer="http://www.ibm.com/websphere/appserver/schemas/5.0/applicationserver.webcontainer.xmi"
+		xmlns:loggingservice.ras="http://www.ibm.com/websphere/appserver/schemas/5.0/loggingservice.ras.xmi"
+		xmlns:namingserver="http://www.ibm.com/websphere/appserver/schemas/5.0/namingserver.xmi"
+		xmlns:orb="http://www.ibm.com/websphere/appserver/schemas/5.0/orb.xmi"
+		xmlns:pmiservice="http://www.ibm.com/websphere/appserver/schemas/5.0/pmiservice.xmi"
+		xmlns:processexec="http://www.ibm.com/websphere/appserver/schemas/5.0/processexec.xmi"
+		xmlns:traceservice="http://www.ibm.com/websphere/appserver/schemas/5.0/traceservice.xmi"
+		xmi:version="2.0"
+		xmi:id="Server_1078493424411"
+		name="STEST_Server">
+		<stateManagement
+			xmi:id="StateManageable_1078493424419"
+			initialState="START" />
+		<statisticsProvider
+			xmi:id="StatisticsProvider_1078493424419"
+			specification="com.ibm.orb=enabled" />
+		<services
+			xmi:type="pmiservice:PMIService"
+			xmi:id="PMIService_1078493424419"
+			enable="true"
+			initialSpecLevel="beanModule=H:cacheModule=H:connectionPoolModule=H:j2cModule=H:jvmRuntimeModule=H:orbPerfModule=H:servletSessionsModule=H:systemModule=H:threadPoolModule=H:transactionModule=H:webAppModule=H:webServicesModule=H:wlmModule=H:wsgwModule=H" />
+		<services
+			xmi:type="adminservice:AdminService"
+			xmi:id="AdminService_1078493424419"
+			enable="true"
+			standalone="false"
+			preferredConnector="SOAPConnector_1078493424419">
+			<connectors
+				xmi:type="adminservice:SOAPConnector"
+				xmi:id="SOAPConnector_1078493424419">
+				<properties
+					xmi:id="Property_1078493424419"
+					name="sslConfig"
+					value="E050_WAS5_INT02Manager/DefaultSSLSettings" />
+			</connectors>
+			<connectors
+				xmi:type="adminservice:RMIConnector"
+				xmi:id="RMIConnector_1078493424419" />
+		</services>
+		<services
+			xmi:type="traceservice:TraceService"
+			xmi:id="TraceService_1078493424420"
+			enable="true"
+			startupTraceSpecification="*=all=disabled"
+			traceOutputType="SPECIFIED_FILE"
+			traceFormat="BASIC"
+			memoryBufferSize="8">
+			<traceLog
+				xmi:id="TraceLog_1078493424420"
+				fileName="${SERVER_ROOT}/work/logs/trace.log"
+				rolloverSize="1000"
+				maxNumberOfBackupFiles="1" />
+		</services>
+		<services
+			xmi:type="loggingservice.ras:RASLoggingService"
+			xmi:id="RASLoggingService_1078493424420"
+			enable="true"
+			messageFilterLevel="AUDIT"
+			enableCorrelationId="true">
+			<serviceLog
+				xmi:id="ServiceLog_1078493424420"
+				name="${LOG_ROOT}/activity.log"
+				size="2"
+				enabled="true" />
+		</services>
+		<services
+			xmi:type="orb:ObjectRequestBroker"
+			xmi:id="ObjectRequestBroker_1078493424420"
+			enable="true"
+			requestTimeout="180"
+			requestRetriesCount="1"
+			requestRetriesDelay="0"
+			connectionCacheMaximum="240"
+			connectionCacheMinimum="100"
+			commTraceEnabled="false"
+			locateRequestTimeout="180"
+			forceTunnel="never"
+			noLocalCopies="false">
+			<properties
+				xmi:id="Property_1078493424420"
+				name="com.ibm.CORBA.enableLocateRequest"
+				value="true" />
+			<properties
+				xmi:id="Property_1078493424421"
+				name="com.ibm.CORBA.WSSSLServerSocketFactoryName"
+				value="com.ibm.ws.security.orbssl.WSSSLServerSocketFactoryImpl" />
+			<properties
+				xmi:id="Property_1078493424422"
+				name="com.ibm.CORBA.WSSSLClientSocketFactoryName"
+				value="com.ibm.ws.security.orbssl.WSSSLClientSocketFactoryImpl" />
+			<properties
+				xmi:id="Property_1078493424423"
+				name="com.ibm.CORBA.ConnectionInterceptorName"
+				value="com.ibm.ISecurityLocalObjectBaseL13Impl.SecurityConnectionInterceptor" />
+			<properties
+				xmi:id="Property_1078493424424"
+				name="com.ibm.CORBA.RasManager"
+				value="com.ibm.websphere.ras.WsOrbRasManager" />
+			<properties
+				xmi:id="Property_1078493424425"
+				name="javax.rmi.CORBA.UtilClass"
+				value="com.ibm.ws.orb.WSUtilDelegateImpl" />
+			<interceptors
+				xmi:id="Interceptor_1078493424420"
+				name="com.ibm.ejs.ras.RasContextSupport" />
+			<interceptors
+				xmi:id="Interceptor_1078493424421"
+				name="com.ibm.ws.runtime.workloadcontroller.OrbWorkloadRequestInterceptor" />
+			<interceptors
+				xmi:id="Interceptor_1078493424422"
+				name="com.ibm.ejs.jts.jts.ClientInterceptor" />
+			<interceptors
+				xmi:id="Interceptor_1078493424423"
+				name="com.ibm.ejs.jts.jts.ServerInterceptor" />
+			<interceptors
+				xmi:id="Interceptor_1078493424424"
+				name="com.ibm.ejs.jts.jts.TXIORInterceptor" />
+			<interceptors
+				xmi:id="Interceptor_1078493424425"
+				name="com.ibm.ISecurityLocalObjectBaseL13Impl.SecurityComponentFactory" />
+			<interceptors
+				xmi:id="Interceptor_1078493424426"
+				name="com.ibm.ISecurityLocalObjectBaseL13Impl.ServerRIWrapper" />
+			<interceptors
+				xmi:id="Interceptor_1078493424427"
+				name="com.ibm.ISecurityLocalObjectBaseL13Impl.ClientRIWrapper" />
+			<interceptors
+				xmi:id="Interceptor_1078493424428"
+				name="com.ibm.ISecurityLocalObjectBaseL13Impl.CSIClientRI" />
+			<interceptors
+				xmi:id="Interceptor_1078493424429"
+				name="com.ibm.ISecurityLocalObjectBaseL13Impl.CSIServerRI" />
+			<interceptors
+				xmi:id="Interceptor_1078493424430"
+				name="com.ibm.ws.wlm.client.WLMClientInitializer" />
+			<interceptors
+				xmi:id="Interceptor_1078493424431"
+				name="com.ibm.ws.wlm.server.WLMServerInitializer" />
+			<interceptors
+				xmi:id="Interceptor_1078493424432"
+				name="com.ibm.ws.activity.ActivityServiceServerInterceptor" />
+			<interceptors
+				xmi:id="Interceptor_1078493424433"
+				name="com.ibm.ws.activity.ActivityIORInterceptor" />
+			<interceptors
+				xmi:id="Interceptor_1078493424434"
+				name="com.ibm.debug.DebugPortableInterceptor" />
+			<interceptors
+				xmi:id="Interceptor_1078493424435"
+				name="com.ibm.debug.olt.ivbtrjrt.OLT_RI" />
+			<plugins
+				xmi:id="ORBPlugin_1078493424422"
+				name="com.ibm.ejs.jts.jts.JtsPlugin" />
+			<plugins
+				xmi:id="ORBPlugin_1078493424423"
+				name="com.ibm.ws.orbimpl.transport.WSTransport" />
+			<plugins
+				xmi:id="ORBPlugin_1078493424424"
+				name="com.ibm.ISecurityUtilityImpl.SecurityPropertyManager" />
+			<plugins
+				xmi:id="ORBPlugin_1078493424425"
+				name="com.ibm.ws.orbimpl.WSORBPropertyManager" />
+			<plugins
+				xmi:id="ORBPlugin_1078493424426"
+				name="com.ibm.ws.wlm.client.WLMClient" />
+			<plugins
+				xmi:id="ORBPlugin_1078493424427"
+				name="com.ibm.ws.pmi.server.modules.OrbPerfModule" />
+			<threadPool
+				xmi:id="ThreadPool_1078493424423"
+				minimumSize="10"
+				maximumSize="50"
+				inactivityTimeout="3500"
+				isGrowable="false" />
+		</services>
+		<errorStreamRedirect
+			xmi:id="StreamRedirect_1078493424423"
+			fileName="${SERVER_ROOT}/work/logs/SystemErr.log"
+			rolloverType="TIME"
+			maxNumberOfBackupFiles="30"
+			rolloverSize="1"
+			baseHour="24"
+			rolloverPeriod="24"
+			formatWrites="true"
+			messageFormatKind="BASIC"
+			suppressWrites="false"
+			suppressStackTrace="false" />
+		<outputStreamRedirect
+			xmi:id="StreamRedirect_1078493424424"
+			fileName="${SERVER_ROOT}/work/logs/SystemOut.log"
+			rolloverType="TIME"
+			maxNumberOfBackupFiles="30"
+			rolloverSize="1"
+			baseHour="24"
+			rolloverPeriod="24"
+			formatWrites="true"
+			messageFormatKind="BASIC"
+			suppressWrites="false"
+			suppressStackTrace="false" />
+		<components
+			xmi:type="namingserver:NameServer"
+			xmi:id="NameServer_1078493424423">
+			<stateManagement
+				xmi:id="StateManageable_1078493424423"
+				initialState="START" />
+		</components>
+		<components
+			xmi:type="applicationserver:ApplicationServer"
+			xmi:id="ApplicationServer_1078493424423"
+			name="STEST_Server"
+			applicationClassLoaderPolicy="MULTIPLE">
+			<stateManagement
+				xmi:id="StateManageable_1078493424424"
+				initialState="START" />
+			<services
+				xmi:type="applicationserver:TransactionService"
+				xmi:id="TransactionService_1078493424423"
+				enable="false"
+				transactionLogDirectory="${SERVER_ROOT}/tranlog"
+				totalTranLifetimeTimeout="20"
+				clientInactivityTimeout="60"
+				enableLoggingForHeuristicReporting="false" />
+			<services
+				xmi:type="applicationserver:DynamicCache"
+				xmi:id="DynamicCache_1078493424423"
+				enable="true">
+				<cacheGroups
+					xmi:id="ExternalCacheGroup_1078493424424"
+					name="EsiInvalidator">
+					<members
+						xmi:id="ExternalCacheGroupMember_1078493424424"
+						address="localhost"
+						adapterBeanName="com.ibm.websphere.servlet.cache.ESIInvalidatorServlet" />
+				</cacheGroups>
+			</services>
+			<components
+				xmi:type="applicationserver.webcontainer:WebContainer"
+				xmi:id="WebContainer_1078493424424"
+				enableServletCaching="false">
+				<services
+					xmi:type="applicationserver.webcontainer:SessionManager"
+					xmi:id="SessionManager_1078493424424"
+					enable="true"
+					enableUrlRewriting="false"
+					enableCookies="true"
+					enableSSLTracking="false"
+					enableProtocolSwitchRewriting="false"
+					sessionPersistenceMode="NONE"
+					enableSecurityIntegration="false"
+					allowSerializedSessionAccess="false"
+					maxWaitTime="5"
+					accessSessionOnTimeout="true">
+					<defaultCookieSettings
+						xmi:id="Cookie_1078493424424"
+						domain=""
+						maximumAge="-1"
+						secure="false" />
+					<sessionDatabasePersistence
+						xmi:id="SessionDatabasePersistence_1078493424424"
+						datasourceJNDIName="jdbc/Sessions"
+						userId="db2admin"
+						password="{xor}Oz1tPjsyNjE="
+						db2RowSize="ROW_SIZE_4KB"
+						tableSpaceName="" />
+					<tuningParams
+						xmi:id="TuningParams_1078493424424"
+						usingMultiRowSchema="false"
+						maxInMemorySessionCount="1000"
+						allowOverflow="false"
+						scheduleInvalidation="false"
+						writeFrequency="TIME_BASED_WRITE"
+						writeInterval="120"
+						writeContents="ONLY_UPDATED_ATTRIBUTES"
+						invalidationTimeout="30">
+						<invalidationSchedule
+							xmi:id="InvalidationSchedule_1078493424424"
+							firstHour="14"
+							secondHour="2" />
+					</tuningParams>
+				</services>
+				<transports
+					xmi:type="applicationserver.webcontainer:HTTPTransport"
+					xmi:id="HTTPTransport_1078493424424"
+					sslEnabled="false">
+					<address
+						xmi:id="EndPoint_1078493424293"
+						host=""
+						port="9080" />
+				</transports>
+				<transports
+					xmi:type="applicationserver.webcontainer:HTTPTransport"
+					xmi:id="HTTPTransport_1078493424425"
+					sslEnabled="true"
+					sslConfig="E050_WAS5_INT02Manager/DefaultSSLSettings">
+					<address
+						xmi:id="EndPoint_1078493424294"
+						host=""
+						port="9443" />
+				</transports>
+				<threadPool
+					xmi:id="ThreadPool_1078493424424"
+					minimumSize="10"
+					maximumSize="50"
+					inactivityTimeout="3500"
+					isGrowable="false" />
+			</components>
+			<components
+				xmi:type="applicationserver.ejbcontainer:EJBContainer"
+				xmi:id="EJBContainer_1078493424425"
+				passivationDirectory="${USER_INSTALL_ROOT}/temp"
+				inactivePoolCleanupInterval="30000">
+				<stateManagement
+					xmi:id="StateManageable_1078493424425"
+					initialState="START" />
+				<services
+					xmi:type="applicationserver.ejbcontainer.messagelistener:MessageListenerService"
+					xmi:id="MessageListenerService_1078493424425">
+					<properties
+						xmi:id="Property_1112805233535"
+						name="MAX.RECOVERY.RETRIES"
+						value="5"
+						required="false" />
+					<properties
+						xmi:id="Property_1112805252933"
+						name="RECOVERY.RETRY.INTERVAL"
+						value="10"
+						required="false" />
+					<properties
+						xmi:id="Property_1112810655869"
+						name="NON.ASF.RECEIVE.TIMEOUT"
+						value="2000"
+						required="false" />
+					<listenerPorts
+						xmi:id="ListenerPort_1078501611014"
+						name="listener1"
+						connectionFactoryJNDIName="jms/wasXaTestFactory1"
+						destinationJNDIName="jms/wasXaTestQueue1"
+						maxSessions="1"
+						maxRetries="2"
+						maxMessages="1">
+						<stateManagement
+							xmi:id="StateManageable_1078501611014"
+							initialState="STOP" />
+					</listenerPorts>
+					<listenerPorts
+						xmi:id="ListenerPort_1092307375230"
+						name="listener2"
+						connectionFactoryJNDIName="jms/wasXaTestFactory2"
+						destinationJNDIName="jms/wasXaTestQueue2"
+						maxSessions="1"
+						maxRetries="3"
+						maxMessages="1">
+						<stateManagement
+							xmi:id="StateManageable_1092307375230"
+							initialState="STOP" />
+					</listenerPorts>
+					<threadPool
+						xmi:id="ThreadPool_1078493424425"
+						minimumSize="10"
+						maximumSize="50"
+						inactivityTimeout="3500"
+						isGrowable="false" />
+				</services>
+				<cacheSettings
+					xmi:id="EJBCache_1078493424425"
+					cleanupInterval="3000"
+					cacheSize="2053" />
+			</components>
+		</components>
+		<processDefinition
+			xmi:type="processexec:JavaProcessDef"
+			xmi:id="JavaProcessDef_1078493424425"
+			executableName="${JAVA_HOME}/bin/java"
+			workingDirectory="${SERVER_ROOT}/work"
+			executableTargetKind="JAVA_CLASS"
+			executableTarget="com.ibm.ws.runtime.WsServer">
+			<execution
+				xmi:id="ProcessExecution_1078493424425"
+				processPriority="20"
+				umask="002"
+				runAsUser="stest"
+				runAsGroup="wasas"
+				runInProcessGroup="0" />
+			<ioRedirect
+				xmi:id="OutputRedirect_1078493424425"
+				stdoutFilename="${SERVER_ROOT}/work/logs/native_stdout.log"
+				stderrFilename="${SERVER_ROOT}/work/logs/native_stderr.log" />
+			<environment
+				xmi:id="Property_1130247756612"
+				name="IBM_HEAPDUMP"
+				value="true" />
+			<environment
+				xmi:id="Property_1130247757276"
+				name="IBM_HEAPDUMP_OUTOFMEMORY"
+				value="false" />
+			<monitoringPolicy
+				xmi:id="MonitoringPolicy_1078493424425"
+				maximumStartupAttempts="3"
+				pingInterval="60"
+				pingTimeout="300"
+				autoRestart="true"
+				nodeRestartState="PREVIOUS" />
+			<jvmEntries
+				xmi:id="JavaVirtualMachine_1078493424425"
+				verboseModeClass="false"
+				verboseModeGarbageCollection="true"
+				verboseModeJNI="false"
+				initialHeapSize="0"
+				maximumHeapSize="256"
+				runHProf="false"
+				debugMode="false"
+				debugArgs="-Djava.compiler=NONE -Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=7777"
+				disableJIT="false">
+				<systemProperties
+					xmi:id="Property_1100167283104"
+					name="oracle.jdbc.Trace"
+					value="false"
+					required="false" />
+				<systemProperties
+					xmi:id="Property_1100167304924"
+					name="oracle.jdbc.LogFile"
+					value="oratrace.log"
+					required="false" />
+				<systemProperties
+					xmi:id="Property_1130247757705"
+					name="sun.net.inetaddr.ttl"
+					value="60" />
+			</jvmEntries>
+		</processDefinition>
+	</process:Server>
+	<xmi:XMI
+		xmlns:xmi="http://www.omg.org/XMI"
+		xmlns:namebindings="http://www.ibm.com/websphere/appserver/schemas/5.0/namebindings.xmi"
+		xmi:version="2.0">
+		<namebindings:StringNameSpaceBinding
+			xmi:id="StringNameSpaceBinding_1095164344616"
+			name="sleepTime"
+			nameInNameSpace="sleepTime"
+			stringToBind="5000" />
+		<namebindings:StringNameSpaceBinding
+			xmi:id="StringNameSpaceBinding_1110909315577"
+			name="testServer"
+			nameInNameSpace="testServer"
+			stringToBind="testServerValue" />
+	</xmi:XMI>
+	<libraries:Library
+		xmlns:libraries="http://www.ibm.com/websphere/appserver/schemas/5.0/libraries.xmi"
+		xmlns:xmi="http://www.omg.org/XMI"
+		xmi:version="2.0"
+		xmi:id="Library_1085488901970"
+		name="lib"
+		description="Directory to add to ARCON221 classpath for use with external java libraries">
+		<classPath>${WAS_INSTALL_ROOT}/config/appdata/arcon221/lib/xalan.jar</classPath>
+		<classPath>${WAS_INSTALL_ROOT}/config/appdata/arcon221/lib/xercesImpl.jar</classPath>
+		<classPath>${WAS_INSTALL_ROOT}/config/appdata/arcon221/lib/xml-apis.jar</classPath>
+	</libraries:Library>
+	<xmi:XMI
+		xmlns:xmi="http://www.omg.org/XMI"
+		xmlns:resources.j2c="http://www.ibm.com/websphere/appserver/schemas/5.0/resources.j2c.xmi"
+		xmlns:resources.jdbc="http://www.ibm.com/websphere/appserver/schemas/5.0/resources.jdbc.xmi"
+		xmlns:resources.jms="http://www.ibm.com/websphere/appserver/schemas/5.0/resources.jms.xmi"
+		xmlns:resources.jms.mqseries="http://www.ibm.com/websphere/appserver/schemas/5.0/resources.jms.mqseries.xmi"
+		xmlns:resources.mail="http://www.ibm.com/websphere/appserver/schemas/5.0/resources.mail.xmi"
+		xmlns:resources.url="http://www.ibm.com/websphere/appserver/schemas/5.0/resources.url.xmi"
+		xmi:version="2.0">
+		<resources.jms:JMSProvider
+			xmi:id="builtin_jmsprovider"
+			name="WebSphere JMS Provider"
+			description="Built-in WebSphere JMS Provider"
+			externalInitialContextFactory=""
+			externalProviderURL="" />
+		<resources.jms:JMSProvider
+			xmi:id="builtin_mqprovider"
+			name="WebSphere MQ JMS Provider"
+			description="WebSphere MQ JMS Provider"
+			externalInitialContextFactory=""
+			externalProviderURL="">
+			<classpath>${MQJMS_LIB_ROOT}</classpath>
+			<nativepath>${MQJMS_LIB_ROOT}</nativepath>
+			<factories
+				xmi:type="resources.jms.mqseries:MQQueueConnectionFactory"
+				xmi:id="MQQueueConnectionFactory_1074519257514"
+				name="wasXaTestFactory1"
+				jndiName="jms/wasXaTestFactory1"
+				authMechanismPreference="BASIC_PASSWORD"
+				XAEnabled="true"
+				queueManager="XBOI023E"
+				host="xboi023e"
+				port="1414"
+				channel="XBOI023E.CL.WAS"
+				transportType="CLIENT"
+				msgRetention="true">
+				<connectionPool
+					xmi:id="ConnectionPool_1074519257515"
+					connectionTimeout="180"
+					minConnections="0" />
+				<mapping
+					xmi:id="MappingModule_1074519257515"
+					mappingConfigAlias="DefaultPrincipalMapping"
+					authDataAlias="" />
+				<sessionPool
+					xmi:id="ConnectionPool_1074519257516"
+					connectionTimeout="180"
+					minConnections="0" />
+			</factories>
+			<factories
+				xmi:type="resources.jms.mqseries:MQQueue"
+				xmi:id="MQQueue_1074519327461"
+				name="wasXaTestQueue1"
+				jndiName="jms/wasXaTestQueue1"
+				persistence="APPLICATION_DEFINED"
+				priority="APPLICATION_DEFINED"
+				specifiedPriority="0"
+				expiry="APPLICATION_DEFINED"
+				specifiedExpiry="0"
+				baseQueueName="XB.WAS.E.WAS.WAS.01"
+				baseQueueManagerName="XBOI023E"
+				useNativeEncoding="false"
+				integerEncoding="Normal"
+				decimalEncoding="Normal"
+				floatingPointEncoding="IEEENormal"
+				targetClient="JMS" />
+			<factories
+				xmi:type="resources.jms.mqseries:MQQueueConnectionFactory"
+				xmi:id="MQQueueConnectionFactory_1081873603747"
+				name="wasXaTestFactory2"
+				jndiName="jms/wasXaTestFactory2"
+				authMechanismPreference="BASIC_PASSWORD"
+				XAEnabled="true"
+				queueManager="XBOI023E"
+				host="xboi023e"
+				port="1414"
+				channel="XBOI023E.CL.WAS"
+				transportType="CLIENT"
+				msgRetention="true">
+				<connectionPool
+					xmi:id="ConnectionPool_1081873603747"
+					connectionTimeout="180"
+					minConnections="0" />
+				<mapping
+					xmi:id="MappingModule_1081873603747"
+					mappingConfigAlias="DefaultPrincipalMapping"
+					authDataAlias="" />
+				<sessionPool
+					xmi:id="ConnectionPool_1081873603748"
+					connectionTimeout="180"
+					minConnections="0" />
+			</factories>
+			<factories
+				xmi:type="resources.jms.mqseries:MQQueue"
+				xmi:id="MQQueue_1081873672650"
+				name="wasXaTestQueue2"
+				jndiName="jms/wasXaTestQueue2"
+				persistence="APPLICATION_DEFINED"
+				priority="APPLICATION_DEFINED"
+				specifiedPriority="0"
+				expiry="APPLICATION_DEFINED"
+				specifiedExpiry="0"
+				baseQueueName="XB.WAS.E.WAS.WAS.02"
+				baseQueueManagerName="XBOI023E"
+				useNativeEncoding="false"
+				integerEncoding="Normal"
+				decimalEncoding="Normal"
+				floatingPointEncoding="IEEENormal"
+				targetClient="JMS" />
+		</resources.jms:JMSProvider>
+		<resources.j2c:J2CResourceAdapter
+			xmi:id="builtin_rra"
+			name="WebSphere Relational Resource Adapter"
+			description="Built-in Relational Resource Adapter for Container Managed Persistence"
+			archivePath="${WAS_LIBS_DIR}/rsadapter.rar">
+			<propertySet xmi:id="J2EEResourcePropertySet_8">
+				<resourceProperties
+					xmi:id="J2EEResourceProperty_31"
+					name="TransactionResourceRegistration"
+					type="java.lang.String"
+					value="dynamic"
+					description="Type of transaction resource registration (enlistment).  Valid values are either &quot;static&quot; (immediate) or &quot;dynamic&quot; (deferred)." />
+				<resourceProperties
+					xmi:id="J2EEResourceProperty_32"
+					name="InactiveConnectionSupport"
+					type="java.lang.Boolean"
+					value="true"
+					description="Specify whether connection handles support implicit reactivation. (Smart Handle support). Value may be &quot;true&quot; or &quot;false&quot;." />
+			</propertySet>
+		</resources.j2c:J2CResourceAdapter>
+		<resources.mail:MailProvider
+			xmi:id="builtin_mailprovider"
+			name="Built-in Mail Provider"
+			description="The built-in mail provider">
+			<protocolProviders
+				xmi:id="builtin_smtp"
+				protocol="smtp"
+				classname="com.sun.mail.smtp.SMTPTransport"
+				type="TRANSPORT" />
+			<protocolProviders
+				xmi:id="builtin_pop3"
+				protocol="pop3"
+				classname="com.sun.mail.pop3.POP3Store"
+				type="STORE" />
+			<protocolProviders
+				xmi:id="builtin_imap"
+				protocol="imap"
+				classname="com.sun.mail.imap.IMAPStore"
+				type="STORE" />
+		</resources.mail:MailProvider>
+		<resources.url:URLProvider
+			xmi:id="URLProvider_1"
+			name="Default URL Provider"
+			streamHandlerClassName="unused"
+			protocol="unused" />
+		<resources.jdbc:JDBCProvider
+			xmi:id="JDBCProvider_1074261320544"
+			name="Oracle JDBC Driver (XA)"
+			description="Oracle JDBC Driver (XA)"
+			implementationClassName="oracle.jdbc.xa.client.OracleXADataSource"
+			xa="false">
+			<classpath>${ORACLE_JDBC_DRIVER_PATH}/classes12_v9205.zip</classpath>
+			<factories
+				xmi:type="resources.jdbc:DataSource"
+				xmi:id="DataSource_1079367241128"
+				name="S52I_FAKT_W50"
+				jndiName="jdbc/oradb_xa"
+				description="New JDBC Datasource"
+				authMechanismPreference="BASIC_PASSWORD"
+				authDataAlias="E050_WAS5_INT02Manager/sttest_ora"
+				statementCacheSize="10"
+				datasourceHelperClassname="com.ibm.websphere.rsadapter.OracleDataStoreHelper"
+				relationalResourceAdapter="builtin_rra">
+				<propertySet xmi:id="J2EEResourcePropertySet_1079367241129">
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1079367241129"
+						name="driverType"
+						type="java.lang.String"
+						value=""
+						description="The type of the driver. The possible values are: thin, oci8." />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1079367241130"
+						name="oraclelogPrintMask"
+						type="java.lang.Integer"
+						value="127"
+						description="The oraclelogPrintMask controls which information is printed with each trace message. Oracle9i requires the use of classes12_g.zip.  Default is 62 which is ([OracleLog.FIELD_OBJECT for 9i / OracleLog.FIELD_CONN for 8i] 32 | OracleLog.FIELD_CATEGORY 16 | OracleLog.FIELD_SUBMOD 8 | OracleLog.FIELD_MODULE 4 | OracleLog.FIELD_TIME  2).  Possible values:  OracleLog.FIELD_TIME  2, OracleLog.FIELD_MODULE  4, OracleLog.FIELD_SUBMOD  8, OracleLog.FIELD_CATEGORY  16, OracleLog.FIELD_OBJECT  32, OracleLog.FIELD_THREAD  64"
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1079367241131"
+						name="oraclelogModuleMask"
+						type="java.lang.Integer"
+						value="3"
+						description="The oraclelogModuleMask controls which modules write debug output. Oracle9i requires the use of classes12_g.zip.  Default is 1 which is ( OracleLog.MODULE_DRIVER  1).  Possible values (OracleLog.MODULE_DRIVER  1, OracleLog.MODULE_DBACCESS  2)"
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1079367241132"
+						name="oraclelogCategoryMask"
+						type="java.lang.Integer"
+						value="255"
+						description="The oraclelogCategoryMask controls which category to be output. Oracle9i requires the use of classes12_g.zip.  Default is 47 which is ( OracleLog.USER_OPER  1 | OracleLog.PROG_ERROR  2 | OracleLog.ERROR  4 | OracleLog.WARNING  8 | OracleLog.DEBUG1  32).  Possible values (OracleLog.USER_OPER  1, OracleLog.PROG_ERROR  2, OracleLog.ERROR  4, OracleLog.WARNING  8, OracleLog.FUNCTION  16, OracleLog.DEBUG1  32, OracleLog.SQL_STR  128)"
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1079367241133"
+						name="TNSEntryName"
+						type="java.lang.String"
+						value=""
+						description="The entry name which is used for the Oracle OCI driver." />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1079367241134"
+						name="networkProtocol"
+						type="java.lang.String"
+						value=""
+						description="Whether to use TCP/IP or IPC or any other protocol" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1079367241135"
+						name="databaseName"
+						type="java.lang.String"
+						value=""
+						description="The database name. For example, enter sample to make your Data Source point to sample.  used for thin driver setup" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1079367241136"
+						name="serverName"
+						type="java.lang.String"
+						value=""
+						description="The name of the server. used for thin driver setup" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1079367241137"
+						name="portNumber"
+						type="java.lang.Integer"
+						value="1521"
+						description="The TCP/IP port number where the jdbc driver resides. used for thin driver setup" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1079367241138"
+						name="dataSourceName"
+						type="java.lang.String"
+						value=""
+						description="The name of the Data Source." />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1079367241139"
+						name="URL"
+						type="java.lang.String"
+						value="jdbc:oracle:thin:@faktiw50:1526:s52"
+						description="This is a required property. The URL indicating the database from which the Data Source will obtain connections, such as 'jdbc:oracle:thin:@localhost:1521:sample' for thin driver and 'jdbc:oracle:oci8:@sample' for thick driver."
+						required="true" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1079367241140"
+						name="loginTimeout"
+						type="java.lang.Integer"
+						value=""
+						description="The maximum time to attempt to connect a database. If this value is non-zero, attempt to connect to the database will timeout when this specified value is reached." />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1079367241141"
+						name="description"
+						type="java.lang.String"
+						value=""
+						description="The description of this datasource." />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1079367241142"
+						name="enableMultithreadedAccessDetection"
+						type="java.lang.Boolean"
+						value="false"
+						description="Indicates whether or not to detect multithreaded access to a Connection and its corresponding Statements, ResultSets, and MetaDatas." />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1079367241143"
+						name="transactionBranchesLooselyCoupled"
+						type="java.lang.Boolean"
+						value="false"
+						description="This property is introduced as a result of Oraclebug 2511780, Oracle Patch for 2511780 must be installed before setting this property to true, failure to do that would cause a program error.  Please check the WebSphere readme file for more info ." />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1079367241144"
+						name="preTestSQLString"
+						type="java.lang.String"
+						value="SELECT USER FROM DUAL"
+						description="This query string is used for pre-test connection. For example, 'SELECT USER FROM DUAL'. When pre-test connection is enabled in j2c.properties, a statement will be executed with this query to make sure the connection is good.  If no query is specified, the default 'SELECT COUNT(*) FROM rra.x1x1x0x4x' will be used."
+						required="false" />
+				</propertySet>
+				<connectionPool
+					xmi:id="ConnectionPool_1079367241147"
+					connectionTimeout="180"
+					maxConnections="10"
+					minConnections="0"
+					reapTime="180"
+					unusedTimeout="1800"
+					agedTimeout="0"
+					purgePolicy="EntirePool" />
+				<mapping
+					xmi:id="MappingModule_1079367241132"
+					mappingConfigAlias="DefaultPrincipalMapping"
+					authDataAlias="E050_WAS5_INT02Manager/sttest_ora" />
+			</factories>
+		</resources.jdbc:JDBCProvider>
+		<resources.jdbc:JDBCProvider
+			xmi:id="JDBCProvider_1095845442645"
+			name="DB2 Universal JDBC Driver Provider"
+			description="Non-XA DB2 Universal JDBC Driver-compliant Provider.   Datasources created under this provider support only 1-phase commit processing except in the case where driver type 2 is used under WAS z/OS. On WAS z/OS, driver type 2   uses RRS and supports 2-phase commit processing"
+			implementationClassName="com.ibm.db2.jcc.DB2ConnectionPoolDataSource"
+			xa="false">
+			<classpath>${DB2UNIVERSAL_JDBC_DRIVER_PATH}/db2jcc_v81196.jar</classpath>
+			<classpath>${DB2UNIVERSAL_JDBC_DRIVER_PATH}/db2jcc_license_cu_v81196.jar</classpath>
+			<classpath>${DB2UNIVERSAL_JDBC_DRIVER_PATH}/db2jcc_license_cisuz.jar</classpath>
+			<factories
+				xmi:type="resources.jdbc:DataSource"
+				xmi:id="DataSource_1095845472238"
+				name="sttest_videv2040"
+				jndiName="jdbc/db2db"
+				description="DB2 Universal Driver Datasource"
+				authMechanismPreference="BASIC_PASSWORD"
+				authDataAlias="E050_WAS5_INT02Manager/sttest_db2"
+				statementCacheSize="10"
+				datasourceHelperClassname="com.ibm.websphere.rsadapter.DB2UniversalDataStoreHelper"
+				relationalResourceAdapter="builtin_rra">
+				<propertySet xmi:id="J2EEResourcePropertySet_1095845472238">
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845472238"
+						name="databaseName"
+						type="java.lang.String"
+						value="sttest"
+						description="This is a required property. This is an actual database name, and its not the locally catalogued database name. The Universal JDBC Driver does not rely on information catalogued in the DB2 database directory."
+						required="true" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845472239"
+						name="driverType"
+						type="java.lang.Integer"
+						value="4"
+						description="The JDBC connectivity-type of a data source. If you want to use type 4 driver, set the value to 4. If you want to use type 2 driver, set the value to 2."
+						required="true" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845472240"
+						name="serverName"
+						type="java.lang.String"
+						value="videv2040"
+						description="The TCP/IP address or host name for the DRDA server. If custom property driverType is set to 4, this property is required."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845472241"
+						name="portNumber"
+						type="java.lang.Integer"
+						value="60080"
+						description="The TCP/IP port number where the DRDA server resides. If custom property driverType is set to 4, this property is required."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845472242"
+						name="description"
+						type="java.lang.String"
+						value=""
+						description="The description of this datasource."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845472243"
+						name="traceLevel"
+						type="java.lang.Integer"
+						value="0"
+						description="The DB2 trace level for logging to the logWriter or trace file. Possible trace levels are: TRACE_NONE = 0,TRACE_CONNECTION_CALLS = 1,TRACE_STATEMENT_CALLS = 2,TRACE_RESULT_SET_CALLS = 4,TRACE_DRIVER_CONFIGURATION = 16,TRACE_CONNECTS = 32,TRACE_DRDA_FLOWS = 64,TRACE_RESULT_SET_META_DATA = 128,TRACE_PARAMETER_META_DATA = 256,TRACE_DIAGNOSTICS = 512,TRACE_SQLJ = 1024,TRACE_ALL = -1, ."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845472244"
+						name="traceFile"
+						type="java.lang.String"
+						value="db2trace.log"
+						description="The trace file to store the trace output."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845472245"
+						name="fullyMaterializeLobData"
+						type="java.lang.Boolean"
+						value="true"
+						description="This setting controls whether or not LOB locators are used to fetch LOB data. If enabled, LOB data is not streamed, but is fully materialized with locators when the user requests a stream on the LOB column. The default value is true."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845472246"
+						name="resultSetHoldability"
+						type="java.lang.Integer"
+						value="2"
+						description="Determine whether ResultSets are closed or kept open when committing a transaction. The possible values are: 1 (HOLD_CURSORS_OVER_COMMIT), 2 (CLOSE_CURSORS_AT_COMMIT)."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845472247"
+						name="currentPackageSet"
+						type="java.lang.String"
+						value=""
+						description="This property is used in conjunction with the DB2Binder - collection option which is given when the JDBC/CLI packageset is bound during installation by the DBA."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845472248"
+						name="readOnly"
+						type="java.lang.Boolean"
+						value="false"
+						description="This property creates a read only connection. By default this value is false."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845472249"
+						name="deferPrepares"
+						type="java.lang.Boolean"
+						value="true"
+						description="This property provides a performance directive that affects the internal semantics of the input data type conversion capability of the driver. By default the Universal driver defers 'internal prepare requests'. In this case, the driver works without the benefit of described parameter or result set meta data until execute time. So undescsribed input data is sent 'as is' to the server without any data type cross-conversation of the inputs."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845472250"
+						name="currentSchema"
+						type="java.lang.String"
+						value=""
+						description="Identifies the default schema name used to qualify unqualified database object references where applicable in dynamically prepared SQL statements. Unless currentSchema is used, the default schema name is the authorization id of the current session user."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845472251"
+						name="cliSchema"
+						type="java.lang.String"
+						value=""
+						description="Indicates the schema of the DB2 shadow catalog tables or views to search when you issue a database meta data catalog query."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845472252"
+						name="enableMultithreadedAccessDetection"
+						type="java.lang.Boolean"
+						value="false"
+						description="Indicates whether or not to detect multithreaded access to a Connection and its corresponding Statements, ResultSets, and MetaDatas."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845472253"
+						name="retrieveMessagesFromServerOnGetMessage"
+						type="java.lang.Boolean"
+						value="true"
+						description="Directs all calls to the standard JDBC SQLException.getMessage() to invoke a server-side stored procedure which retrieves the readable message text for the error."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1122886477901"
+						name="clientProgramName"
+						type="java.lang.String"
+						value="STTEST@w50i2n01"
+						required="false" />
+				</propertySet>
+				<connectionPool
+					xmi:id="ConnectionPool_1095845472247"
+					connectionTimeout="180"
+					maxConnections="10"
+					minConnections="0"
+					reapTime="180"
+					unusedTimeout="1800"
+					agedTimeout="0"
+					purgePolicy="EntirePool" />
+				<mapping
+					xmi:id="MappingModule_1095845472240"
+					mappingConfigAlias="DefaultPrincipalMapping"
+					authDataAlias="E050_WAS5_INT02Manager/sttest_db2" />
+			</factories>
+		</resources.jdbc:JDBCProvider>
+		<resources.jdbc:JDBCProvider
+			xmi:id="JDBCProvider_1095845535247"
+			name="DB2 Universal JDBC Driver Provider (XA)"
+			description="DB2 Universal JDBC Driver-compliant Provider"
+			implementationClassName="com.ibm.db2.jcc.DB2XADataSource"
+			xa="false">
+			<classpath>${DB2UNIVERSAL_JDBC_DRIVER_PATH}/db2jcc_v81196.jar</classpath>
+			<classpath>${DB2UNIVERSAL_JDBC_DRIVER_PATH}/db2jcc_license_cu_v81196.jar</classpath>
+			<classpath>${DB2UNIVERSAL_JDBC_DRIVER_PATH}/db2jcc_license_cisuz.jar</classpath>
+			<factories
+				xmi:type="resources.jdbc:DataSource"
+				xmi:id="DataSource_1095845573066"
+				name="sttest_videv2040"
+				jndiName="jdbc/db2db_xa"
+				description="DB2 Universal Driver Datasource"
+				authMechanismPreference="BASIC_PASSWORD"
+				authDataAlias="E050_WAS5_INT02Manager/sttest_db2"
+				statementCacheSize="10"
+				datasourceHelperClassname="com.ibm.websphere.rsadapter.DB2UniversalDataStoreHelper"
+				relationalResourceAdapter="builtin_rra">
+				<propertySet xmi:id="J2EEResourcePropertySet_1095845573066">
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845573066"
+						name="databaseName"
+						type="java.lang.String"
+						value="sttest"
+						description="This is a required property. This is an actual database name, and its not the locally catalogued database name. The Universal JDBC Driver does not rely on information catalogued in the DB2 database directory."
+						required="true" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845573067"
+						name="driverType"
+						type="java.lang.Integer"
+						value="4"
+						description="The JDBC connectivity-type of a data source. The only permitted value is 2."
+						required="true" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845573068"
+						name="serverName"
+						type="java.lang.String"
+						value="videv2040"
+						description="The TCP/IP address or host name for the DRDA server."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845573069"
+						name="portNumber"
+						type="java.lang.Integer"
+						value="60080"
+						description="The TCP/IP port number where the DRDA server resides."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845573070"
+						name="enableSQLJ"
+						type="java.lang.Boolean"
+						value="true"
+						description="This value is used to indicate whether SQLJ operations may be performed with this data source. If enabled, this data source can be used for both JDBC and SQLJ calls. Otherwise, only JDBC usage is permitted."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845573071"
+						name="description"
+						type="java.lang.String"
+						value=""
+						description="The description of this datasource."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845573072"
+						name="traceLevel"
+						type="java.lang.Integer"
+						value="-1"
+						description="The DB2 trace level for logging to the logWriter or trace file. Possible trace levels are: TRACE_NONE = 0,TRACE_CONNECTION_CALLS = 1,TRACE_STATEMENT_CALLS = 2,TRACE_RESULT_SET_CALLS = 4,TRACE_DRIVER_CONFIGURATION = 16,TRACE_CONNECTS = 32,TRACE_DRDA_FLOWS = 64,TRACE_RESULT_SET_META_DATA = 128,TRACE_PARAMETER_META_DATA = 256,TRACE_DIAGNOSTICS = 512,TRACE_SQLJ = 1024,TRACE_ALL = -1, ."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845573073"
+						name="traceFile"
+						type="java.lang.String"
+						value="db2trace.log"
+						description="The trace file to store the trace output."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845573074"
+						name="fullyMaterializeLobData"
+						type="java.lang.Boolean"
+						value="true"
+						description="This setting controls whether or not LOB locators are used to fetch LOB data. If enabled, LOB data is not streamed, but is fully materialized with locators when the user requests a stream on the LOB column. The default value is true."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845573075"
+						name="resultSetHoldability"
+						type="java.lang.Integer"
+						value="2"
+						description="Determine whether ResultSets are closed or kept open when committing a transaction. The possible values are: 1 (HOLD_CURSORS_OVER_COMMIT), 2 (CLOSE_CURSORS_AT_COMMIT)."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845573076"
+						name="currentPackageSet"
+						type="java.lang.String"
+						value=""
+						description="This property is used in conjunction with the DB2Binder - collection option which is given when the JDBC/CLI packageset is bound during installation by the DBA."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845573077"
+						name="readOnly"
+						type="java.lang.Boolean"
+						value="false"
+						description="This property creates a read only connection. By default this value is false."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845573078"
+						name="deferPrepares"
+						type="java.lang.Boolean"
+						value="true"
+						description="This property provides a performance directive that affects the internal semantics of the input data type conversion capability of the driver. By default the Universal driver defers 'internal prepare requests'. In this case, the driver works without the benefit of described parameter or result set meta data until execute time. So undescsribed input data is sent 'as is' to the server without any data type cross-conversation of the inputs."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845573079"
+						name="currentSchema"
+						type="java.lang.String"
+						value=""
+						description="Identifies the default schema name used to qualify unqualified database object references where applicable in dynamically prepared SQL statements. Unless currentSchema is used, the default schema name is the authorization id of the current session user."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845573080"
+						name="cliSchema"
+						type="java.lang.String"
+						value=""
+						description="Indicates the schema of the DB2 shadow catalog tables or views to search when you issue a database meta data catalog query."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845573081"
+						name="enableMultithreadedAccessDetection"
+						type="java.lang.Boolean"
+						value="false"
+						description="Indicates whether or not to detect multithreaded access to a Connection and its corresponding Statements, ResultSets, and MetaDatas."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1095845573082"
+						name="retrieveMessagesFromServerOnGetMessage"
+						type="java.lang.Boolean"
+						value="true"
+						description="Directs all calls to the standard JDBC SQLException.getMessage() to invoke a server-side stored procedure which retrieves the readable message text for the error."
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1122886514949"
+						name="clientProgramName"
+						type="java.lang.String"
+						value="STTEST@w50i2n01"
+						required="false" />
+				</propertySet>
+				<connectionPool
+					xmi:id="ConnectionPool_1095845573083"
+					connectionTimeout="180"
+					maxConnections="10"
+					minConnections="0"
+					reapTime="180"
+					unusedTimeout="1800"
+					agedTimeout="0"
+					purgePolicy="EntirePool" />
+				<mapping
+					xmi:id="MappingModule_1095845573069"
+					mappingConfigAlias="DefaultPrincipalMapping"
+					authDataAlias="E050_WAS5_INT02Manager/sttest_db2" />
+			</factories>
+		</resources.jdbc:JDBCProvider>
+		<resources.jdbc:JDBCProvider
+			xmi:id="JDBCProvider_1100167038713"
+			name="Oracle JDBC Driver"
+			description="Oracle JDBC Driver"
+			implementationClassName="oracle.jdbc.pool.OracleConnectionPoolDataSource"
+			xa="false">
+			<classpath>${ORACLE_JDBC_DRIVER_PATH}/classes12_v9205.zip</classpath>
+			<factories
+				xmi:type="resources.jdbc:DataSource"
+				xmi:id="DataSource_1100167089327"
+				name="S52I_FAKT_W50"
+				jndiName="jdbc/oradb"
+				description="New JDBC Datasource"
+				authMechanismPreference="BASIC_PASSWORD"
+				authDataAlias="E050_WAS5_INT02Manager/sttest_ora"
+				statementCacheSize="10"
+				datasourceHelperClassname="com.ibm.websphere.rsadapter.OracleDataStoreHelper"
+				relationalResourceAdapter="builtin_rra">
+				<propertySet xmi:id="J2EEResourcePropertySet_1100167089328">
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1100167089328"
+						name="driverType"
+						type="java.lang.String"
+						value=""
+						description="The type of the driver. The possible values are: thin, oci8." />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1100167089329"
+						name="oraclelogPrintMask"
+						type="java.lang.Integer"
+						value="127"
+						description="The oraclelogPrintMask controls which information is printed with each trace message. Oracle9i requires the use of classes12_g.zip.  Default is 62 which is ([OracleLog.FIELD_OBJECT for 9i / OracleLog.FIELD_CONN for 8i] 32 | OracleLog.FIELD_CATEGORY 16 | OracleLog.FIELD_SUBMOD 8 | OracleLog.FIELD_MODULE 4 | OracleLog.FIELD_TIME  2).  Possible values:  OracleLog.FIELD_TIME  2, OracleLog.FIELD_MODULE  4, OracleLog.FIELD_SUBMOD  8, OracleLog.FIELD_CATEGORY  16, OracleLog.FIELD_OBJECT  32, OracleLog.FIELD_THREAD  64"
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1100167089330"
+						name="oraclelogModuleMask"
+						type="java.lang.Integer"
+						value="3"
+						description="The oraclelogModuleMask controls which modules write debug output. Oracle9i requires the use of classes12_g.zip.  Default is 1 which is ( OracleLog.MODULE_DRIVER  1).  Possible values (OracleLog.MODULE_DRIVER  1, OracleLog.MODULE_DBACCESS  2)"
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1100167089331"
+						name="oraclelogCategoryMask"
+						type="java.lang.Integer"
+						value="255"
+						description="The oraclelogCategoryMask controls which category to be output. Oracle9i requires the use of classes12_g.zip.  Default is 47 which is ( OracleLog.USER_OPER  1 | OracleLog.PROG_ERROR  2 | OracleLog.ERROR  4 | OracleLog.WARNING  8 | OracleLog.DEBUG1  32).  Possible values (OracleLog.USER_OPER  1, OracleLog.PROG_ERROR  2, OracleLog.ERROR  4, OracleLog.WARNING  8, OracleLog.FUNCTION  16, OracleLog.DEBUG1  32, OracleLog.SQL_STR  128)"
+						required="false" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1100167089332"
+						name="TNSEntryName"
+						type="java.lang.String"
+						value=""
+						description="The entry name which is used for the Oracle OCI driver." />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1100167089333"
+						name="networkProtocol"
+						type="java.lang.String"
+						value=""
+						description="Whether to use TCP/IP or IPC or any other protocol" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1100167089334"
+						name="databaseName"
+						type="java.lang.String"
+						value=""
+						description="The database name. For example, enter sample to make your Data Source point to sample, used with thin driver" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1100167089335"
+						name="serverName"
+						type="java.lang.String"
+						value=""
+						description="The name of the server, used with thin driver setup" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1100167089336"
+						name="portNumber"
+						type="java.lang.Integer"
+						value="1521"
+						description="The TCP/IP port number where the jdbc driver resides. used with thin driver setup" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1100167089337"
+						name="dataSourceName"
+						type="java.lang.String"
+						value=""
+						description="The name of the Data Source." />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1100167089338"
+						name="URL"
+						type="java.lang.String"
+						value="jdbc:oracle:thin:@faktiw50:1526:s52"
+						description="This is a required property. The URL indicating the database from which the Data Source will obtain connections, such as 'jdbc:oracle:thin:@localhost:1521:sample' for thin driver and 'jdbc:oracle:oci8:@sample' for thick driver."
+						required="true" />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1100167089339"
+						name="loginTimeout"
+						type="java.lang.Integer"
+						value=""
+						description="The maximum time to attempt to connect a database. If this value is non-zero, attempt to connect to the database will timeout when this specified value is reached." />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1100167089340"
+						name="description"
+						type="java.lang.String"
+						value=""
+						description="The description of this datasource." />
+					<resourceProperties
+						xmi:id="J2EEResourceProperty_1100167089341"
+						name="enableMultithreadedAccessDetection"
+						type="java.lang.Boolean"
+						value="false"
+						description="Indicates whether or not to detect multithreaded access to a Connection and its corresponding Statements, ResultSets, and MetaDatas." />
+				</propertySet>
+				<connectionPool
+					xmi:id="ConnectionPool_1100167089347"
+					connectionTimeout="180"
+					maxConnections="10"
+					minConnections="0"
+					reapTime="180"
+					unusedTimeout="1800"
+					agedTimeout="0"
+					purgePolicy="EntirePool" />
+				<mapping
+					xmi:id="MappingModule_1100167089330"
+					mappingConfigAlias="DefaultPrincipalMapping"
+					authDataAlias="E050_WAS5_INT02Manager/sttest_ora" />
+			</factories>
+		</resources.jdbc:JDBCProvider>
+	</xmi:XMI>
+	<variables:VariableMap
+		xmlns:variables="http://www.ibm.com/websphere/appserver/schemas/5.0/variables.xmi"
+		xmlns:xmi="http://www.omg.org/XMI"
+		xmi:version="2.0"
+		xmi:id="VariableMap_1">
+		<entries
+			xmi:id="VariableSubstitutionEntry_1078493424580"
+			symbolicName="SERVER_LOG_ROOT"
+			value="${LOG_ROOT}/STEST_Server"
+			description="The log root directory for server STEST_Server." />
+		<entries
+			xmi:id="VariableSubstitutionEntry_1130247753244"
+			symbolicName="SERVER_ROOT"
+			value="${USER_INSTALL_ROOT}/servers/STEST_Server" />
+	</variables:VariableMap>
+</WebSphereServerConfig>

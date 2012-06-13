@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT address EMPTY>
+<!ATTLIST address
+	xmi:id CDATA #REQUIRED
+	host CDATA #REQUIRED
+	port CDATA #REQUIRED
+>
+<!ELEMENT cacheGroups (members)>
+<!ATTLIST cacheGroups
+	xmi:id CDATA #REQUIRED
+	name CDATA #REQUIRED
+>
+<!ELEMENT cacheSettings EMPTY>
+<!ATTLIST cacheSettings
+	xmi:id CDATA #REQUIRED
+	cleanupInterval CDATA #REQUIRED
+	cacheSize CDATA #REQUIRED
+>
+<!ELEMENT components (stateManagement?, services*, components*, transports*, threadPool?, cacheSettings?)>
+<!ATTLIST components
+	xmi:type CDATA #REQUIRED
+	xmi:id CDATA #REQUIRED
+	name CDATA #IMPLIED
+	applicationClassLoaderPolicy CDATA #IMPLIED
+	enableServletCaching (true | false) #IMPLIED
+	passivationDirectory CDATA #IMPLIED
+	inactivePoolCleanupInterval CDATA #IMPLIED
+>
+<!ELEMENT connectors (properties?)>
+<!ATTLIST connectors
+	xmi:type CDATA #REQUIRED
+	xmi:id CDATA #REQUIRED
+>
+<!ELEMENT defaultCookieSettings EMPTY>
+<!ATTLIST defaultCookieSettings
+	xmi:id CDATA #REQUIRED
+	domain CDATA #REQUIRED
+	maximumAge CDATA #REQUIRED
+	secure (true | false) #REQUIRED
+>
+<!ELEMENT environment EMPTY>
+<!ATTLIST environment
+	xmi:id CDATA #REQUIRED
+	name CDATA #REQUIRED
+	value CDATA #REQUIRED
+	required (true | false) #IMPLIED
+>
+<!ELEMENT errorStreamRedirect EMPTY>
+<!ATTLIST errorStreamRedirect
+	xmi:id CDATA #REQUIRED
+	fileName CDATA #REQUIRED
+	rolloverType CDATA #REQUIRED
+	maxNumberOfBackupFiles CDATA #REQUIRED
+	rolloverSize CDATA #REQUIRED
+	baseHour CDATA #REQUIRED
+	rolloverPeriod CDATA #REQUIRED
+	formatWrites CDATA #REQUIRED
+	messageFormatKind CDATA #REQUIRED
+	suppressWrites CDATA #REQUIRED
+	suppressStackTrace CDATA #REQUIRED
+>
+<!ELEMENT execution EMPTY>
+<!ATTLIST execution
+	xmi:id CDATA #REQUIRED
+	processPriority CDATA #REQUIRED
+	umask CDATA #REQUIRED
+	runAsUser CDATA #REQUIRED
+	runAsGroup CDATA #REQUIRED
+	runInProcessGroup CDATA #REQUIRED
+>
+<!ELEMENT interceptors EMPTY>
+<!ATTLIST interceptors
+	xmi:id CDATA #REQUIRED
+	name CDATA #REQUIRED
+>
+<!ELEMENT invalidationSchedule EMPTY>
+<!ATTLIST invalidationSchedule
+	xmi:id CDATA #REQUIRED
+	firstHour CDATA #REQUIRED
+	secondHour CDATA #REQUIRED
+>
+<!ELEMENT ioRedirect EMPTY>
+<!ATTLIST ioRedirect
+	xmi:id CDATA #REQUIRED
+	stdoutFilename CDATA #REQUIRED
+	stderrFilename CDATA #REQUIRED
+>
+<!ELEMENT jvmEntries EMPTY>
+<!ATTLIST jvmEntries
+	xmi:id CDATA #REQUIRED
+	verboseModeClass (true | false) #REQUIRED
+	verboseModeGarbageCollection (true | false) #REQUIRED
+	verboseModeJNI (true | false) #REQUIRED
+	initialHeapSize CDATA #REQUIRED
+	maximumHeapSize CDATA #REQUIRED
+	runHProf (true | false) #REQUIRED
+	hprofArguments CDATA #REQUIRED
+	debugMode (true | false) #REQUIRED
+	debugArgs CDATA #REQUIRED
+	genericJvmArguments CDATA #REQUIRED
+>
+<!ELEMENT listenerPorts (stateManagement)>
+<!ATTLIST listenerPorts
+	xmi:id CDATA #REQUIRED
+	name CDATA #REQUIRED
+	connectionFactoryJNDIName CDATA #REQUIRED
+	destinationJNDIName CDATA #REQUIRED
+	maxSessions CDATA #REQUIRED
+	maxRetries CDATA #REQUIRED
+	maxMessages CDATA #REQUIRED
+>
+<!ELEMENT members EMPTY>
+<!ATTLIST members
+	xmi:id CDATA #REQUIRED
+	address CDATA #REQUIRED
+	adapterBeanName CDATA #REQUIRED
+>
+<!ELEMENT monitoringPolicy EMPTY>
+<!ATTLIST monitoringPolicy
+	xmi:id CDATA #REQUIRED
+	maximumStartupAttempts CDATA #REQUIRED
+	pingInterval CDATA #REQUIRED
+	pingTimeout CDATA #REQUIRED
+	autoRestart (true | false) #REQUIRED
+	nodeRestartState (RUNNING | STOPPED | PREVIOUS) #REQUIRED
+>
+<!ELEMENT outputStreamRedirect EMPTY>
+<!ATTLIST outputStreamRedirect
+	xmi:id CDATA #REQUIRED
+	fileName CDATA #REQUIRED
+	rolloverType CDATA #REQUIRED
+	maxNumberOfBackupFiles CDATA #REQUIRED
+	rolloverSize CDATA #REQUIRED
+	baseHour CDATA #REQUIRED
+	rolloverPeriod CDATA #REQUIRED
+	formatWrites CDATA #REQUIRED
+	messageFormatKind CDATA #REQUIRED
+	suppressWrites CDATA #REQUIRED
+	suppressStackTrace CDATA #REQUIRED
+>
+<!ELEMENT plugins EMPTY>
+<!ATTLIST plugins
+	xmi:id CDATA #REQUIRED
+	name CDATA #REQUIRED
+>
+<!ELEMENT process:Server (stateManagement, statisticsProvider, services+, errorStreamRedirect, outputStreamRedirect, components+, processDefinition)>
+<!ATTLIST process:Server
+	xmi:version CDATA #REQUIRED
+	xmlns:xmi CDATA #REQUIRED
+	xmlns:adminservice CDATA #REQUIRED
+	xmlns:applicationserver CDATA #REQUIRED
+	xmlns:applicationserver.ejbcontainer CDATA #REQUIRED
+	xmlns:applicationserver.ejbcontainer.messagelistener CDATA #REQUIRED
+	xmlns:applicationserver.webcontainer CDATA #REQUIRED
+	xmlns:loggingservice.ras CDATA #REQUIRED
+	xmlns:namingserver CDATA #REQUIRED
+	xmlns:orb CDATA #REQUIRED
+	xmlns:pmiservice CDATA #REQUIRED
+	xmlns:process CDATA #REQUIRED
+	xmlns:processexec CDATA #REQUIRED
+	xmlns:traceservice CDATA #REQUIRED
+	xmi:id CDATA #REQUIRED
+	name CDATA #REQUIRED
+>
+<!ELEMENT processDefinition (execution, ioRedirect, environment+, monitoringPolicy, jvmEntries)>
+<!ATTLIST processDefinition
+	xmi:type CDATA #REQUIRED
+	xmi:id CDATA #REQUIRED
+	executableName CDATA #REQUIRED
+	workingDirectory CDATA #REQUIRED
+	executableTargetKind CDATA #REQUIRED
+	executableTarget CDATA #REQUIRED
+>
+<!ELEMENT properties EMPTY>
+<!ATTLIST properties
+	xmi:id CDATA #REQUIRED
+	name CDATA #REQUIRED
+	value CDATA #REQUIRED
+>
+<!ELEMENT serviceLog EMPTY>
+<!ATTLIST serviceLog
+	xmi:id CDATA #REQUIRED
+	name CDATA #REQUIRED
+	size CDATA #REQUIRED
+	enabled CDATA #REQUIRED
+>
+<!ELEMENT services (connectors*, traceLog?, serviceLog?, properties*, interceptors*, plugins*, listenerPorts*, threadPool?, cacheGroups?, defaultCookieSettings?, sessionDatabasePersistence?, tuningParams?)>
+<!ATTLIST services
+	xmi:type CDATA #REQUIRED
+	xmi:id CDATA #REQUIRED
+	enable CDATA #IMPLIED
+	initialSpecLevel CDATA #IMPLIED
+	standalone CDATA #IMPLIED
+	preferredConnector CDATA #IMPLIED
+	startupTraceSpecification CDATA #IMPLIED
+	traceOutputType CDATA #IMPLIED
+	traceFormat CDATA #IMPLIED
+	memoryBufferSize CDATA #IMPLIED
+	messageFilterLevel CDATA #IMPLIED
+	enableCorrelationId CDATA #IMPLIED
+	requestTimeout CDATA #IMPLIED
+	requestRetriesCount CDATA #IMPLIED
+	requestRetriesDelay CDATA #IMPLIED
+	connectionCacheMaximum CDATA #IMPLIED
+	connectionCacheMinimum CDATA #IMPLIED
+	commTraceEnabled CDATA #IMPLIED
+	locateRequestTimeout CDATA #IMPLIED
+	forceTunnel CDATA #IMPLIED
+	noLocalCopies CDATA #IMPLIED
+	transactionLogDirectory CDATA #IMPLIED
+	totalTranLifetimeTimeout CDATA #IMPLIED
+	clientInactivityTimeout CDATA #IMPLIED
+	enableUrlRewriting CDATA #IMPLIED
+	enableCookies CDATA #IMPLIED
+	enableSSLTracking CDATA #IMPLIED
+	enableProtocolSwitchRewriting CDATA #IMPLIED
+	sessionPersistenceMode CDATA #IMPLIED
+	enableSecurityIntegration CDATA #IMPLIED
+	allowSerializedSessionAccess CDATA #IMPLIED
+	maxWaitTime CDATA #IMPLIED
+	accessSessionOnTimeout CDATA #IMPLIED
+>
+<!ELEMENT sessionDatabasePersistence EMPTY>
+<!ATTLIST sessionDatabasePersistence
+	xmi:id CDATA #REQUIRED
+	datasourceJNDIName CDATA #REQUIRED
+	userId CDATA #REQUIRED
+	password CDATA #REQUIRED
+	db2RowSize CDATA #REQUIRED
+	tableSpaceName CDATA #REQUIRED
+>
+<!ELEMENT stateManagement EMPTY>
+<!ATTLIST stateManagement
+	xmi:id CDATA #REQUIRED
+	initialState CDATA #REQUIRED
+>
+<!ELEMENT statisticsProvider EMPTY>
+<!ATTLIST statisticsProvider
+	xmi:id CDATA #REQUIRED
+	specification CDATA #REQUIRED
+>
+<!ELEMENT threadPool EMPTY>
+<!ATTLIST threadPool
+	xmi:id CDATA #REQUIRED
+	minimumSize CDATA #REQUIRED
+	maximumSize CDATA #REQUIRED
+	inactivityTimeout CDATA #REQUIRED
+	isGrowable (true | false) #REQUIRED
+>
+<!ELEMENT traceLog EMPTY>
+<!ATTLIST traceLog
+	xmi:id CDATA #REQUIRED
+	fileName CDATA #REQUIRED
+	rolloverSize CDATA #REQUIRED
+	maxNumberOfBackupFiles CDATA #REQUIRED
+>
+<!ELEMENT transports (address)>
+<!ATTLIST transports
+	xmi:type CDATA #REQUIRED
+	xmi:id (HTTPTransport_1098254320635 | HTTPTransport_1098254320636) #REQUIRED
+	sslEnabled (true | false) #REQUIRED
+	sslConfig CDATA #IMPLIED
+>
+<!ELEMENT tuningParams (invalidationSchedule)>
+<!ATTLIST tuningParams
+	xmi:id CDATA #REQUIRED
+	usingMultiRowSchema CDATA #REQUIRED
+	maxInMemorySessionCount CDATA #REQUIRED
+	allowOverflow (true | false) #REQUIRED
+	scheduleInvalidation CDATA #REQUIRED
+	writeFrequency CDATA #REQUIRED
+	writeInterval CDATA #REQUIRED
+	writeContents CDATA #REQUIRED
+	invalidationTimeout CDATA #REQUIRED
+>

@@ -1,0 +1,135 @@
+/* $Id: asHtml.css 545 2010-10-11 13:57:51Z zoezalt $ */
+body {
+	font-family: sans-serif;
+}
+
+.level1 {
+	padding: 6px;
+	background-color: #ffffff;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+}
+
+.level2 {
+	position: relative;
+	left: 15mm;
+	width: 93%;
+	padding: 3px;
+	margin-top: 1mm;
+	background-color: #eeeeff;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+}
+
+.level3 {
+	position: relative;
+	left: 15mm;
+	width: 92%;
+	padding: 3px;
+	margin-top: 1mm;
+	background-color: #ddddff;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+}
+
+.level4 {
+	position: relative;
+	left: 15mm;
+	width: 91%;
+	padding: 3px;
+	margin-top: 1mm;
+	background-color: #ccccff;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+}
+
+.level5 {
+	position: relative;
+	left: 15mm;
+	width: 90%;
+	padding: 3px;
+	margin-top: 1mm;
+	background-color: #bbbbff;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+}
+
+.level6 {
+	position: relative;
+	left: 15mm;
+	width: 89%;
+	padding: 3px;
+	margin-top: 1mm;
+	background-color: #aaaaff;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+}
+
+.level7 {
+	position: relative;
+	left: 15mm;
+	width: 88%;
+	padding: 3px;
+	margin-top: 1mm;
+	background-color: #9999ff;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+}
+
+.level8 {
+	position: relative;
+	left: 15mm;
+	width: 87%;
+	padding: 3px;
+	margin-top: 1mm;
+	background-color: #8888ff;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+}
+
+.level9 {
+	position: relative;
+	left: 15mm;
+	width: 86%;
+	padding: 3px;
+	margin-top: 1mm;
+	background-color: #7777ff;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+}
+
+a {
+	color: #ffffff;
+	text-decoration: underline;
+}
+
+a.retired {
+	color: #999999;
+}
+
+a.onwhite {
+	color: #000000;
+}
+
+a:visited {
+	text-decoration: underline;
+}
+
+a:hover {
+	color: #ffdddd;
+	text-decoration: underline;
+}
+
+a:active {
+	color: #dddddd;
+	text-decoration: underline;
+}

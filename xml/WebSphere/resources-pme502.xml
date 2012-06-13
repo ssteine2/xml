@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dynacache:CacheProvider xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:dynacache="http://www.ibm.com/websphere/appserver/schemas/5.0.2/dynacache.xmi" xmi:id="CacheProvider_1055745612404" name="CacheProvider" description="Default Cache Provider">
+  <factories xmi:type="dynacache:ObjectCacheInstance" xmi:id="ObjectCacheInstance_1145980798375" name="DefaultCache" jndiName="dmap/default" defaultPriority="1" cacheSize="2000" enableCacheReplication="false" replicationType="NONE" pushFrequency="1" enableDiskOffload="false" disableDependencyId="false"/>
+</dynacache:CacheProvider>

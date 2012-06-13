@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI
+	xmi:version="2.0"
+	xmlns:xmi="http://www.omg.org/XMI"
+	xmlns:objectpoolmanager="http://www.ibm.com/websphere/appserver/schemas/5.0/objectpoolmanager.xmi"
+	xmlns:scheduler="http://www.ibm.com/websphere/appserver/schemas/5.0/scheduler.xmi"
+	xmlns:workmanager="http://www.ibm.com/websphere/appserver/schemas/5.0/workmanager.xmi">
+	<objectpoolmanager:ObjectPoolProvider
+		xmi:id="ObjectPoolProvider_1"
+		name="ObjectPoolProvider"
+		description="Default Object Pool Provider" />
+	<workmanager:WorkManagerProvider
+		xmi:id="WorkManagerProvider_1"
+		name="WorkManagerProvider"
+		description="Default WorkManager Provider">
+		<factories
+			xmi:type="workmanager:WorkManagerInfo"
+			xmi:id="WorkManagerInfo_Default"
+			name="DefaultWorkManager"
+			jndiName="wm/default"
+			description="WebSphere Default WorkManager"
+			category="Default"
+			minThreads="555"
+			maxThreads="666"
+			threadPriority="7"
+			numAlarmThreads="444"
+			isGrowable="false"
+			workTimeout="222"
+			workReqQSize="333"
+			workReqQFullAction="1">
+			<serviceNames>com.ibm.ws.i18n</serviceNames>
+			<serviceNames>security</serviceNames>
+			<serviceNames>UserWorkArea</serviceNames>
+		</factories>
+	</workmanager:WorkManagerProvider>
+	<workmanager:TimerManagerProvider
+		xmi:id="TimerManagerProvider_1"
+		name="TimerManagerProvider"
+		description="Default TimerManager Provider">
+		<factories
+			xmi:type="workmanager:TimerManagerInfo"
+			xmi:id="TimerManagerInfo_Default"
+			name="DefaultTimerManager"
+			jndiName="tm/default"
+			description="WebSphere Default TimerManager"
+			numAlarmThreads="111" />
+	</workmanager:TimerManagerProvider>
+	<scheduler:SchedulerProvider
+		xmi:id="SchedulerProvider_1"
+		name="SchedulerProvider"
+		description="Default Scheduler Provider">
+		<factories
+			xmi:type="scheduler:SchedulerConfiguration"
+			xmi:id="SchedulerConfiguration_1152024107490"
+			name="Scheduler"
+			jndiName="sched/default"
+			datasourceJNDIName="jdbc/db2db"
+			tablePrefix="sch1_"
+			pollInterval="888"
+			useAdminRoles="true"
+			workManagerInfo="WorkManagerInfo_Default">
+			<propertySet xmi:id="J2EEResourcePropertySet_1158137837124">
+				<resourceProperties
+					xmi:id="J2EEResourceProperty_1158137837124"
+					name="defaultReadTransactionIso"
+					type="java.lang.String"
+					value="1"
+					required="false" />
+			</propertySet>
+		</factories>
+	</scheduler:SchedulerProvider>
+</xmi:XMI>
