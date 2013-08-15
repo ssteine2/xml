@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="UTF-8"?><xmi:XMI xmlns:xmi="http://www.omg.org/XMI" xmlns:resources.j2c="http://www.ibm.com/websphere/appserver/schemas/5.0/resources.j2c.xmi" xmlns:resources.jdbc="http://www.ibm.com/websphere/appserver/schemas/5.0/resources.jdbc.xmi" xmlns:resources.jms="http://www.ibm.com/websphere/appserver/schemas/5.0/resources.jms.xmi" xmlns:resources.jms.mqseries="http://www.ibm.com/websphere/appserver/schemas/5.0/resources.jms.mqseries.xmi" xmlns:resources.mail="http://www.ibm.com/websphere/appserver/schemas/5.0/resources.mail.xmi" xmlns:resources.url="http://www.ibm.com/websphere/appserver/schemas/5.0/resources.url.xmi" xmi:version="2.0">
+  <resources.jdbc:JDBCProvider name="Cloudscape JDBC Provider (XA)" description="Built-in Cloudscape JDBC Provider (XA)" implementationClassName="com.ibm.db2j.jdbc.DB2jXADataSource" xa="true">
+    <classpath>${CLOUDSCAPE_JDBC_DRIVER_PATH}/db2j.jar</classpath>
+    <factories xmi:type="resources.jdbc:DataSource" name="DefaultEJBTimerDataSource" jndiName="jdbc/DefaultEJBTimerDataSource" description="Default data source for WebSphere EJB Timer Service" category="default" authMechanismPreference="BASIC_PASSWORD" relationalResourceAdapter="builtin_rra" statementCacheSize="10" datasourceHelperClassname="com.ibm.websphere.rsadapter.CloudscapeDataStoreHelper">
+      <propertySet>
+        <resourceProperties name="databaseName" type="java.lang.String" value="${USER_INSTALL_ROOT}/databases/EJBTimers/${SERVER}/EJBTimerDB" description="Location of Cloudscape default database for the EJB Timer Service." required="true"/>
+        <resourceProperties name="shutdownDatabase" type="java.lang.String" value=""/>
+        <resourceProperties name="dataSourceName" type="java.lang.String" value=""/>
+        <resourceProperties name="description" type="java.lang.String" value=""/>
+        <resourceProperties name="connectionAttributes" type="java.lang.String" value="upgrade=true" description="Allows the Cloudscape database to be upgraded."/>
+        <resourceProperties name="createDatabase" type="java.lang.String" value=""/>
+        <resourceProperties name="enableMultithreadedAccessDetection" type="java.lang.Boolean" value="false"/>
+        <resourceProperties name="preTestSQLString" type="java.lang.String" value=""/>
+      </propertySet>
+      <connectionPool connectionTimeout="180" maxConnections="30" minConnections="0" reapTime="180" unusedTimeout="1800" agedTimeout="0" purgePolicy="EntirePool"/>
+    </factories>
+  </resources.jdbc:JDBCProvider>
+  <resources.jms:JMSProvider name="WebSphere JMS Provider" description="V5 Default Messaging Provider" externalInitialContextFactory="" externalProviderURL=""/>
+  <resources.jms:JMSProvider name="WebSphere MQ JMS Provider" description="WebSphere MQ Messaging Provider" externalInitialContextFactory="" externalProviderURL="">
+    <classpath>${MQJMS_LIB_ROOT}</classpath>
+    <nativepath>${MQJMS_LIB_ROOT}</nativepath>
+    <factories xmi:type="resources.jms.mqseries:MQQueueConnectionFactory" name="XBOI165E.CL.WAS" jndiName="jms/wasXaTestFactory" authMechanismPreference="BASIC_PASSWORD" XAEnabled="true" queueManager="XBOI165E" host="XBOI165E" port="1414" channel="XBOI165E.CL.WAS" transportType="CLIENT" clientID="STEST_Server@E050_WAS6_INT01" msgRetention="true" failIfQuiesce="true" pollingInterval="5000" rescanInterval="5000" useConnectionPooling="true">
+      <connectionPool connectionTimeout="180" maxConnections="10" minConnections="0" reapTime="180" unusedTimeout="1800" agedTimeout="0" purgePolicy="EntirePool" testConnection="false" testConnectionInterval="0"/>
+      <mapping mappingConfigAlias="DefaultPrincipalMapping" authDataAlias="w60int01mgr/ststefa"/>
+      <sessionPool connectionTimeout="180" minConnections="0"/>
+    </factories>
+    <factories xmi:type="resources.jms.mqseries:MQQueue" name="XBO.WAS.EU.WAS.WAS.01" jndiName="jms/wasXaTestQueue1" persistence="APPLICATION_DEFINED" priority="APPLICATION_DEFINED" specifiedPriority="0" expiry="APPLICATION_DEFINED" specifiedExpiry="0" baseQueueName="XBO.WAS.EU.WAS.WAS.01" useNativeEncoding="false" integerEncoding="Normal" decimalEncoding="Normal" floatingPointEncoding="IEEENormal" targetClient="MQ" queueManagerPort="0"/>
+    <factories xmi:type="resources.jms.mqseries:MQQueue" name="XBO.WAS.EU.WAS.WAS.01" jndiName="jms/wasXaTestQueue2" persistence="APPLICATION_DEFINED" priority="APPLICATION_DEFINED" specifiedPriority="0" expiry="APPLICATION_DEFINED" specifiedExpiry="0" baseQueueName="XBO.WAS.EU.WAS.WAS.01" useNativeEncoding="false" integerEncoding="Normal" decimalEncoding="Normal" floatingPointEncoding="IEEENormal" targetClient="MQ" queueManagerPort="0"/>
+    <factories xmi:type="resources.jms.mqseries:MQQueueConnectionFactory" name="XBO4007E.CL.CLIENTA" jndiName="jms/claFactory" authMechanismPreference="BASIC_PASSWORD" XAEnabled="true" queueManager="XBO4007E" host="XBO4007E" port="1414" channel="XBO4007E.CL.CLIENTA" transportType="CLIENT" clientID="clienta" msgRetention="true" failIfQuiesce="true" pollingInterval="5000" rescanInterval="5000" useConnectionPooling="true">
+      <connectionPool connectionTimeout="180" minConnections="0"/>
+      <mapping mappingConfigAlias="DefaultPrincipalMapping" authDataAlias="w60int01mgr/sttest_mqclaapp"/>
+      <sessionPool connectionTimeout="180" minConnections="0"/>
+    </factories>
+    <factories xmi:type="resources.jms.mqseries:MQQueueConnectionFactory" name="XBO4007E.CL.CLIENTB" jndiName="jms/clbFactory" authMechanismPreference="BASIC_PASSWORD" XAEnabled="true" queueManager="XBO4007E" host="XBO4007E" port="1414" channel="XBO4007E.CL.CLIENTB" transportType="CLIENT" msgRetention="true" failIfQuiesce="true" pollingInterval="5000" rescanInterval="5000" useConnectionPooling="true">
+      <connectionPool connectionTimeout="180" minConnections="0"/>
+      <mapping mappingConfigAlias="DefaultPrincipalMapping" authDataAlias="w60int01mgr/sttest_mqclbapp"/>
+      <sessionPool connectionTimeout="180" minConnections="0"/>
+    </factories>
+    <factories xmi:type="resources.jms.mqseries:MQQueue" name="XBO.CLIENTA.E.CLIENTA.MQSEC.01" jndiName="jms/claQueue" persistence="APPLICATION_DEFINED" priority="APPLICATION_DEFINED" specifiedPriority="0" expiry="APPLICATION_DEFINED" specifiedExpiry="0" baseQueueName="XBO.CLIENTA.E.CLIENTA.MQSEC.01" useNativeEncoding="false" integerEncoding="Normal" decimalEncoding="Normal" floatingPointEncoding="IEEENormal" targetClient="JMS" queueManagerPort="0"/>
+    <factories xmi:type="resources.jms.mqseries:MQQueue" name="XBO.CLIENTB.E.CLIENTB.MQSEC.01" jndiName="jms/clbQueue" persistence="APPLICATION_DEFINED" priority="APPLICATION_DEFINED" specifiedPriority="0" expiry="APPLICATION_DEFINED" specifiedExpiry="0" baseQueueName="XBO.CLIENTB.E.CLIENTB.MQSEC.01" useNativeEncoding="false" integerEncoding="Normal" decimalEncoding="Normal" floatingPointEncoding="IEEENormal" targetClient="JMS" queueManagerPort="0"/>
+  </resources.jms:JMSProvider>
+  <resources.j2c:J2CResourceAdapter name="WebSphere Relational Resource Adapter" description="Built-in Relational Resource Adapter for WebSphere Persistence" archivePath="${WAS_LIBS_DIR}/rsadapter.rar">
+    <classpath>${WAS_LIBS_DIR}/rsadapter.rar</classpath>
+    <factories xmi:type="resources.jdbc:CMPConnectorFactory" name="STTEST_CF" authMechanismPreference="BASIC_PASSWORD" authDataAlias="w60int01mgr/sttest" xaRecoveryAuthAlias="w60int01mgr/sttest" connectionDefinition="ConnectionDefinition_1054132487569" cmpDatasource="DataSource_1145980387924">
+      <propertySet/>
+      <mapping mappingConfigAlias="DefaultPrincipalMapping" authDataAlias=""/>
+    </factories>
+    <factories xmi:type="resources.jdbc:CMPConnectorFactory" name="STTEST_CF" authMechanismPreference="BASIC_PASSWORD" authDataAlias="w60int01mgr/sttest" connectionDefinition="ConnectionDefinition_1054132487569" cmpDatasource="DataSource_1152082658711">
+      <propertySet/>
+      <mapping mappingConfigAlias="DefaultPrincipalMapping" authDataAlias=""/>
+    </factories>
+    <factories xmi:type="resources.jdbc:CMPConnectorFactory" name="S52I_FAKT_W50_CF" authMechanismPreference="BASIC_PASSWORD" authDataAlias="w60int01mgr/sttest_ora" connectionDefinition="ConnectionDefinition_1054132487569" cmpDatasource="DataSource_1152279188846">
+      <propertySet/>
+      <mapping mappingConfigAlias="DefaultPrincipalMapping" authDataAlias=""/>
+    </factories>
+    <factories xmi:type="resources.jdbc:CMPConnectorFactory" name="S52I_FAKT_W50_CF" authMechanismPreference="BASIC_PASSWORD" authDataAlias="w60int01mgr/sttest_ora" xaRecoveryAuthAlias="w60int01mgr/sttest_ora" connectionDefinition="ConnectionDefinition_1054132487569" cmpDatasource="DataSource_1152519649332">
+      <propertySet/>
+      <mapping mappingConfigAlias="DefaultPrincipalMapping" authDataAlias=""/>
+    </factories>
+    <factories xmi:type="resources.jdbc:CMPConnectorFactory" name="SybaseDatasourceName_CF" authMechanismPreference="BASIC_PASSWORD" connectionDefinition="ConnectionDefinition_1054132487569">
+      <propertySet/>
+      <mapping mappingConfigAlias="" authDataAlias=""/>
+    </factories>
+    <factories xmi:type="resources.jdbc:CMPConnectorFactory" name="MySybaseDataSource_CF" authMechanismPreference="BASIC_PASSWORD" authDataAlias="w60int01mgr/MyAlias" connectionDefinition="ConnectionDefinition_1054132487569" cmpDatasource="DataSource_1202142942252">
+      <propertySet/>
+    </factories>
+    <propertySet/>
+    <deploymentDescriptor displayName="WS_RdbResourceAdapter" vendorName="IBM" specVersion="1.5" eisType="RRA" version="6.0">
+      <icons smallIcon="rdb_small_icon.jpg" largeIcon="rdb_large_icon.jpg"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <displayNames value="WS_RdbResourceAdapter"/>
+      <descriptions value="IBM Relational ResourceAdapter"/>
+      <license required="false">
+        <descriptions value="IBM Relational ResourceAdapter"/>
+      </license>
+      <resourceAdapter transactionSupport="NoTransaction" reauthenticationSupport="false" resourceAdapterClass="com.ibm.ws.rsadapter.spi.WSResourceAdapterImpl">
+        <outboundResourceAdapter reauthenticationSupport="false" transactionSupport="XATransaction">
+          <connectionDefinitions managedConnectionFactoryClass="com.ibm.ws.rsadapter.spi.WSManagedConnectionFactoryImpl" connectionFactoryInterface="javax.resource.cci.ConnectionFactory" connectionFactoryImplClass="com.ibm.ws.rsadapter.cci.WSRdbConnectionFactoryImpl" connectionInterface="javax.resource.cci.Connection" connectionImplClass="com.ibm.ws.rsadapter.cci.WSRdbConnectionImpl">
+            <configProperties name="ConnectionFactoryType" type="java.lang.Integer" value="2">
+              <descriptions value="A constant indicating the type of connection factory: WSJdbcDataSource (1) or WSRdbConnectionFactory (2)"/>
+            </configProperties>
+          </connectionDefinitions>
+          <authenticationMechanisms authenticationMechanismType="BasicPassword" credentialInterface="javax.resource.spi.security.PasswordCredential">
+            <descriptions value="BasicPassword authentication"/>
+          </authenticationMechanisms>
+          <authenticationMechanisms authenticationMechanismType="Kerbv5" credentialInterface="javax.resource.spi.security.GenericCredential">
+            <descriptions value="Kerbv5 Authentication"/>
+          </authenticationMechanisms>
+        </outboundResourceAdapter>
+      </resourceAdapter>
+    </deploymentDescriptor>
+    <connectionDefTemplateProps ConnectionDefinition="ConnectionDefinition_1054132487569"/>
+  </resources.j2c:J2CResourceAdapter>
+  <resources.mail:MailProvider name="Built-in Mail Provider" description="The built-in mail provider">
+    <protocolProviders protocol="smtp" classname="com.sun.mail.smtp.SMTPTransport" type="TRANSPORT"/>
+    <protocolProviders protocol="pop3" classname="com.sun.mail.pop3.POP3Store" type="STORE"/>
+    <protocolProviders protocol="imap" classname="com.sun.mail.imap.IMAPStore" type="STORE"/>
+  </resources.mail:MailProvider>
+  <resources.url:URLProvider name="Default URL Provider" streamHandlerClassName="unused" protocol="unused">
+    <factories xmi:type="resources.url:URL" name="UrlName" jndiName="url/jndi" spec="http://www.google.de"/>
+  </resources.url:URLProvider>
+  <resources.j2c:J2CResourceAdapter name="SIB JMS Resource Adapter" archivePath="${WAS_INSTALL_ROOT}/installedConnectors/sib.api.jmsra.rar">
+    <classpath>${WAS_INSTALL_ROOT}/installedConnectors/sib.api.jmsra.rar</classpath>
+    <propertySet/>
+    <deploymentDescriptor displayName="WebSphere Default Messaging Provider" vendorName="IBM" specVersion="1.5" eisType="JMS Provider" version="0.3">
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <displayNames value="WebSphere Default Messaging Provider"/>
+      <resourceAdapter transactionSupport="NoTransaction" reauthenticationSupport="false" resourceAdapterClass="com.ibm.ws.sib.api.jmsra.impl.JmsJcaResourceAdapterImpl">
+        <outboundResourceAdapter reauthenticationSupport="false" transactionSupport="XATransaction">
+          <connectionDefinitions managedConnectionFactoryClass="com.ibm.ws.sib.api.jmsra.impl.JmsJcaManagedQueueConnectionFactoryImpl" connectionFactoryInterface="javax.jms.QueueConnectionFactory" connectionFactoryImplClass="com.ibm.ws.sib.api.jms.impl.JmsQueueConnFactoryImpl" connectionInterface="javax.jms.QueueConnection" connectionImplClass="com.ibm.ws.sib.api.jms.impl.JmsQueueConnectionImpl">
+            <configProperties name="BusName" type="java.lang.String"/>
+            <configProperties name="ClientID" type="java.lang.String"/>
+            <configProperties name="UserName" type="java.lang.String"/>
+            <configProperties name="Password" type="java.lang.String"/>
+            <configProperties name="NonPersistentMapping" type="java.lang.String" value="ExpressNonPersistent"/>
+            <configProperties name="PersistentMapping" type="java.lang.String" value="ReliablePersistent"/>
+            <configProperties name="ReadAhead" type="java.lang.String" value="Default"/>
+            <configProperties name="Target" type="java.lang.String"/>
+            <configProperties name="TargetType" type="java.lang.String" value="BusMember"/>
+            <configProperties name="TargetSignificance" type="java.lang.String" value="Preferred"/>
+            <configProperties name="RemoteProtocol" type="java.lang.String"/>
+            <configProperties name="TargetTransportChain" type="java.lang.String"/>
+            <configProperties name="ProviderEndpoints" type="java.lang.String"/>
+            <configProperties name="ConnectionProximity" type="java.lang.String" value="Bus"/>
+            <configProperties name="TemporaryQueueNamePrefix" type="java.lang.String"/>
+            <configProperties name="ShareDataSourceWithCMP" type="java.lang.Boolean" value="false"/>
+          </connectionDefinitions>
+          <connectionDefinitions managedConnectionFactoryClass="com.ibm.ws.sib.api.jmsra.impl.JmsJcaManagedTopicConnectionFactoryImpl" connectionFactoryInterface="javax.jms.TopicConnectionFactory" connectionFactoryImplClass="com.ibm.ws.sib.api.jms.impl.JmsTopicConnFactoryImpl" connectionInterface="javax.jms.TopicConnection" connectionImplClass="com.ibm.ws.sib.api.jms.impl.JmsTopicConnectionImpl">
+            <configProperties name="BusName" type="java.lang.String"/>
+            <configProperties name="ClientID" type="java.lang.String"/>
+            <configProperties name="UserName" type="java.lang.String"/>
+            <configProperties name="Password" type="java.lang.String"/>
+            <configProperties name="NonPersistentMapping" type="java.lang.String" value="ExpressNonPersistent"/>
+            <configProperties name="PersistentMapping" type="java.lang.String" value="ReliablePersistent"/>
+            <configProperties name="DurableSubscriptionHome" type="java.lang.String"/>
+            <configProperties name="ReadAhead" type="java.lang.String" value="Default"/>
+            <configProperties name="Target" type="java.lang.String"/>
+            <configProperties name="TargetType" type="java.lang.String" value="BusMember"/>
+            <configProperties name="TargetSignificance" type="java.lang.String" value="Preferred"/>
+            <configProperties name="RemoteProtocol" type="java.lang.String"/>
+            <configProperties name="TargetTransportChain" type="java.lang.String"/>
+            <configProperties name="ProviderEndpoints" type="java.lang.String"/>
+            <configProperties name="ConnectionProximity" type="java.lang.String" value="Bus"/>
+            <configProperties name="TemporaryTopicNamePrefix" type="java.lang.String"/>
+            <configProperties name="ShareDataSourceWithCMP" type="java.lang.Boolean" value="false"/>
+            <configProperties name="ShareDurableSubscriptions" type="java.lang.String" value="InCluster"/>
+          </connectionDefinitions>
+          <connectionDefinitions managedConnectionFactoryClass="com.ibm.ws.sib.api.jmsra.impl.JmsJcaManagedConnectionFactoryImpl" connectionFactoryInterface="javax.jms.ConnectionFactory" connectionFactoryImplClass="com.ibm.ws.sib.api.jms.impl.JmsConnFactoryImpl" connectionInterface="javax.jms.Connection" connectionImplClass="com.ibm.ws.sib.api.jms.impl.JmsConnectionImpl">
+            <configProperties name="BusName" type="java.lang.String"/>
+            <configProperties name="ClientID" type="java.lang.String"/>
+            <configProperties name="UserName" type="java.lang.String"/>
+            <configProperties name="Password" type="java.lang.String"/>
+            <configProperties name="NonPersistentMapping" type="java.lang.String" value="ExpressNonPersistent"/>
+            <configProperties name="PersistentMapping" type="java.lang.String" value="ReliablePersistent"/>
+            <configProperties name="DurableSubscriptionHome" type="java.lang.String"/>
+            <configProperties name="ReadAhead" type="java.lang.String" value="Default"/>
+            <configProperties name="Target" type="java.lang.String"/>
+            <configProperties name="TargetType" type="java.lang.String" value="BusMember"/>
+            <configProperties name="TargetSignificance" type="java.lang.String" value="Preferred"/>
+            <configProperties name="RemoteProtocol" type="java.lang.String"/>
+            <configProperties name="TargetTransportChain" type="java.lang.String"/>
+            <configProperties name="ProviderEndpoints" type="java.lang.String"/>
+            <configProperties name="ConnectionProximity" type="java.lang.String" value="Bus"/>
+            <configProperties name="TemporaryQueueNamePrefix" type="java.lang.String"/>
+            <configProperties name="TemporaryTopicNamePrefix" type="java.lang.String"/>
+            <configProperties name="ShareDataSourceWithCMP" type="java.lang.Boolean" value="false"/>
+            <configProperties name="ShareDurableSubscriptions" type="java.lang.String" value="InCluster"/>
+          </connectionDefinitions>
+          <authenticationMechanisms authenticationMechanismType="BasicPassword" credentialInterface="javax.resource.spi.security.PasswordCredential"/>
+        </outboundResourceAdapter>
+        <inboundResourceAdapter>
+          <messageAdapter>
+            <messageListeners messageListenerType="javax.jms.MessageListener">
+              <activationSpec activationSpecClass="com.ibm.ws.sib.api.jmsra.impl.JmsJcaActivationSpecImpl">
+                <requiredConfigProperties name="destination"/>
+                <requiredConfigProperties name="destinationType"/>
+                <requiredConfigProperties name="busName"/>
+              </activationSpec>
+            </messageListeners>
+          </messageAdapter>
+        </inboundResourceAdapter>
+        <adminObjects adminObjectInterface="javax.jms.Queue" adminObjectClass="com.ibm.ws.sib.api.jms.impl.JmsQueueImpl">
+          <configProperties name="QueueName" type="java.lang.String"/>
+          <configProperties name="DeliveryMode" type="java.lang.String" value="Application"/>
+          <configProperties name="TimeToLive" type="java.lang.Long"/>
+          <configProperties name="Priority" type="java.lang.Integer"/>
+          <configProperties name="ReadAhead" type="java.lang.String" value="AsConnection"/>
+          <configProperties name="BusName" type="java.lang.String"/>
+        </adminObjects>
+        <adminObjects adminObjectInterface="javax.jms.Topic" adminObjectClass="com.ibm.ws.sib.api.jms.impl.JmsTopicImpl">
+          <configProperties name="TopicSpace" type="java.lang.String" value="Default.Topic.Space"/>
+          <configProperties name="TopicName" type="java.lang.String"/>
+          <configProperties name="DeliveryMode" type="java.lang.String" value="Application"/>
+          <configProperties name="TimeToLive" type="java.lang.Long"/>
+          <configProperties name="Priority" type="java.lang.Integer"/>
+          <configProperties name="ReadAhead" type="java.lang.String" value="AsConnection"/>
+          <configProperties name="BusName" type="java.lang.String"/>
+        </adminObjects>
+      </resourceAdapter>
+    </deploymentDescriptor>
+    <connectionDefTemplateProps ConnectionDefinition="ConnectionDefinition_1128503977192">
+      <resourceProperties name="BusName" type="java.lang.String" required="false"/>
+      <resourceProperties name="ClientID" type="java.lang.String" required="false"/>
+      <resourceProperties name="ConnectionProximity" type="java.lang.String" value="Bus" required="false"/>
+      <resourceProperties name="durableSubscriptionHome" type="java.lang.String" required="false"/>
+      <resourceProperties name="NonPersistentMapping" type="java.lang.String" value="ExpressNonPersistent" required="false"/>
+      <resourceProperties name="Password" type="java.lang.String" required="false"/>
+      <resourceProperties name="PersistentMapping" type="java.lang.String" value="ReliablePersistent" required="false"/>
+      <resourceProperties name="ProviderEndpoints" type="java.lang.String" required="false"/>
+      <resourceProperties name="ReadAhead" type="java.lang.String" value="Default" required="false"/>
+      <resourceProperties name="RemoteProtocol" type="java.lang.String" required="false"/>
+      <resourceProperties name="TargetTransportChain" type="java.lang.String" required="false"/>
+      <resourceProperties name="ShareDataSourceWithCMP" type="java.lang.Boolean" value="false" required="false"/>
+      <resourceProperties name="shareDurableSubscriptions" type="java.lang.String" value="AsCluster" required="false"/>
+      <resourceProperties name="Target" type="java.lang.String" required="false"/>
+      <resourceProperties name="TargetSignificance" type="java.lang.String" value="Preferred" required="false"/>
+      <resourceProperties name="TargetType" type="java.lang.String" value="BusMember" required="false"/>
+      <resourceProperties name="TemporaryQueueNamePrefix" type="java.lang.String" required="false"/>
+      <resourceProperties name="temporaryTopicNamePrefix" type="java.lang.String" required="false"/>
+      <resourceProperties name="UserName" type="java.lang.String" required="false"/>
+    </connectionDefTemplateProps>
+    <connectionDefTemplateProps ConnectionDefinition="ConnectionDefinition_1128503977200">
+      <resourceProperties name="BusName" type="java.lang.String" required="false"/>
+      <resourceProperties name="ClientID" type="java.lang.String" required="false"/>
+      <resourceProperties name="ConnectionProximity" type="java.lang.String" value="Bus" required="false"/>
+      <resourceProperties name="DurableSubscriptionHome" type="java.lang.String" required="false"/>
+      <resourceProperties name="NonPersistentMapping" type="java.lang.String" value="ExpressNonPersistent" required="false"/>
+      <resourceProperties name="Password" type="java.lang.String" required="false"/>
+      <resourceProperties name="PersistentMapping" type="java.lang.String" value="ReliablePersistent" required="false"/>
+      <resourceProperties name="ProviderEndpoints" type="java.lang.String" required="false"/>
+      <resourceProperties name="ReadAhead" type="java.lang.String" value="Default" required="false"/>
+      <resourceProperties name="RemoteProtocol" type="java.lang.String" required="false"/>
+      <resourceProperties name="TargetTransportChain" type="java.lang.String" required="false"/>
+      <resourceProperties name="ShareDataSourceWithCMP" type="java.lang.Boolean" value="false" required="false"/>
+      <resourceProperties name="ShareDurableSubscriptions" type="java.lang.String" value="InCluster" required="false"/>
+      <resourceProperties name="Target" type="java.lang.String" required="false"/>
+      <resourceProperties name="TargetSignificance" type="java.lang.String" value="Preferred" required="false"/>
+      <resourceProperties name="TargetType" type="java.lang.String" value="BusMember" required="false"/>
+      <resourceProperties name="temporaryQueueNamePrefix" type="java.lang.String" required="false"/>
+      <resourceProperties name="TemporaryTopicNamePrefix" type="java.lang.String" required="false"/>
+      <resourceProperties name="UserName" type="java.lang.String" required="false"/>
+    </connectionDefTemplateProps>
+    <connectionDefTemplateProps ConnectionDefinition="ConnectionDefinition_1128503977208">
+      <resourceProperties name="BusName" type="java.lang.String" required="false"/>
+      <resourceProperties name="ClientID" type="java.lang.String" required="false"/>
+      <resourceProperties name="ConnectionProximity" type="java.lang.String" value="Bus" required="false"/>
+      <resourceProperties name="DurableSubscriptionHome" type="java.lang.String" required="false"/>
+      <resourceProperties name="NonPersistentMapping" type="java.lang.String" value="ExpressNonPersistent" required="false"/>
+      <resourceProperties name="Password" type="java.lang.String" required="false"/>
+      <resourceProperties name="PersistentMapping" type="java.lang.String" value="ReliablePersistent" required="false"/>
+      <resourceProperties name="ProviderEndpoints" type="java.lang.String" required="false"/>
+      <resourceProperties name="ReadAhead" type="java.lang.String" value="Default" required="false"/>
+      <resourceProperties name="RemoteProtocol" type="java.lang.String" required="false"/>
+      <resourceProperties name="TargetTransportChain" type="java.lang.String" required="false"/>
+      <resourceProperties name="ShareDataSourceWithCMP" type="java.lang.Boolean" value="false" required="false"/>
+      <resourceProperties name="ShareDurableSubscriptions" type="java.lang.String" value="InCluster" required="false"/>
+      <resourceProperties name="Target" type="java.lang.String" required="false"/>
+      <resourceProperties name="TargetSignificance" type="java.lang.String" value="Preferred" required="false"/>
+      <resourceProperties name="TargetType" type="java.lang.String" value="BusMember" required="false"/>
+      <resourceProperties name="TemporaryQueueNamePrefix" type="java.lang.String" required="false"/>
+      <resourceProperties name="TemporaryTopicNamePrefix" type="java.lang.String" required="false"/>
+      <resourceProperties name="UserName" type="java.lang.String" required="false"/>
+    </connectionDefTemplateProps>
+    <activationSpecTemplateProps activationSpec="ActivationSpec_1128503977216">
+      <resourceProperties name="acknowledgeMode" type="java.lang.String" value="Auto-acknowledge" required="false"/>
+      <resourceProperties name="busName" type="java.lang.String" required="true"/>
+      <resourceProperties name="clientId" type="java.lang.String" required="false"/>
+      <resourceProperties name="destination" type="javax.jms.Destination" required="true"/>
+      <resourceProperties name="destinationType" type="java.lang.String" required="true"/>
+      <resourceProperties name="durableSubscriptionHome" type="java.lang.String" required="false"/>
+      <resourceProperties name="maxBatchSize" type="java.lang.Integer" value="1" required="false"/>
+      <resourceProperties name="maxConcurrency" type="java.lang.Integer" value="10" required="false"/>
+      <resourceProperties name="messageSelector" type="java.lang.String" required="false"/>
+      <resourceProperties name="password" type="java.lang.String" required="false"/>
+      <resourceProperties name="readAhead" type="java.lang.String" value="Default" required="false"/>
+      <resourceProperties name="shareDataSourceWithCMP" type="java.lang.Boolean" value="false" required="false"/>
+      <resourceProperties name="shareDurableSubscriptions" type="java.lang.String" value="InCluster" required="false"/>
+      <resourceProperties name="subscriptionDurability" type="java.lang.String" value="NonDurable" required="false"/>
+      <resourceProperties name="subscriptionName" type="java.lang.String" required="false"/>
+      <resourceProperties name="targetTransportChain" type="java.lang.String" required="false"/>
+      <resourceProperties name="userName" type="java.lang.String" required="false"/>
+      <complexPropertySet>
+        <resourceProperties name="destination" type="javax.jms.Destination" required="false"/>
+      </complexPropertySet>
+    </activationSpecTemplateProps>
+    <adminObjectTemplateProps adminObject="AdminObject_1128503977217">
+      
+      
+      
+      
+      
+      
+      
+      
+    </adminObjectTemplateProps>
+    <adminObjectTemplateProps adminObject="AdminObject_1128503977220">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </adminObjectTemplateProps>
+  </resources.j2c:J2CResourceAdapter>
+  <resources.jdbc:JDBCProvider name="DB2 Universal JDBC Driver Provider (XA)" description="XA DB2 Universal JDBC Driver-compliant Provider. Datasources created under this provider support the use of XA to perform    2-phase commit processing. Use of driver type 2 on WAS z/OS is not supported for datasources created under this provider." providerType="DB2 Universal JDBC Driver Provider (XA)" implementationClassName="com.ibm.db2.jcc.DB2XADataSource" xa="true">
+    <classpath>${DB2UNIVERSAL_JDBC_DRIVER_PATH}/db2jcc.jar</classpath>
+    <classpath>${UNIVERSAL_JDBC_DRIVER_PATH}/db2jcc_license_cu.jar</classpath>
+    <classpath>${DB2UNIVERSAL_JDBC_DRIVER_PATH}/db2jcc_license_cisuz.jar</classpath>
+    <nativepath>${DB2UNIVERSAL_JDBC_DRIVER_NATIVEPATH}</nativepath>
+    <factories xmi:type="resources.jdbc:DataSource" name="STTEST" jndiName="jdbc/db2db_xa" description="DB2 Universal Driver Datasource" providerType="DB2 Universal JDBC Driver Provider (XA)" authMechanismPreference="BASIC_PASSWORD" authDataAlias="w60int01mgr/sttest" xaRecoveryAuthAlias="w60int01mgr/sttest" relationalResourceAdapter="builtin_rra" statementCacheSize="10" datasourceHelperClassname="com.ibm.websphere.rsadapter.DB2UniversalDataStoreHelper">
+      <propertySet>
+        <resourceProperties name="databaseName" type="java.lang.String" value="STTEST" description="This is a required property. This is an actual database name, and its not the locally catalogued database name. The Universal JDBC Driver does not rely on information catalogued in the DB2 database directory." required="true"/>
+        <resourceProperties name="driverType" type="java.lang.Integer" value="4" description="The JDBC connectivity-type of a data source. If you want to use a type 4 driver, set the value to 4. If you want to use a type 2 driver, set the value to 2. Use of driverType 2 is not supported on WAS z/OS." required="true"/>
+        <resourceProperties name="serverName" type="java.lang.String" value="sttest" description="The TCP/IP address or host name for the DRDA server." required="false"/>
+        <resourceProperties name="portNumber" type="java.lang.Integer" value="60112" description="The TCP/IP port number where the DRDA server resides." required="false"/>
+        <resourceProperties name="description" type="java.lang.String" value="" description="The description of this datasource." required="false"/>
+        <resourceProperties name="traceLevel" type="java.lang.Integer" value="" description="The DB2 trace level for logging to the logWriter or trace file. Possible trace levels are: TRACE_NONE = 0,TRACE_CONNECTION_CALLS = 1,TRACE_STATEMENT_CALLS = 2,TRACE_RESULT_SET_CALLS = 4,TRACE_DRIVER_CONFIGURATION = 16,TRACE_CONNECTS = 32,TRACE_DRDA_FLOWS = 64,TRACE_RESULT_SET_META_DATA = 128,TRACE_PARAMETER_META_DATA = 256,TRACE_DIAGNOSTICS = 512,TRACE_SQLJ = 1024,TRACE_ALL = -1, ." required="false"/>
+        <resourceProperties name="traceFile" type="java.lang.String" value="" description="The trace file to store the trace output. If you specify the trace file, the DB2 Jcc trace will be logged in this trace file. If this property is not specified and the WAS.database trace group is enabled, then both WebSphere trace and DB2 trace will be logged into the WebSphere trace file." required="false"/>
+        <resourceProperties name="fullyMaterializeLobData" type="java.lang.Boolean" value="true" description="This setting controls whether or not LOB locators are used to fetch LOB data. If enabled, LOB data is not streamed, but is fully materialized with locators when the user requests a stream on the LOB column. The default value is true." required="false"/>
+        <resourceProperties name="resultSetHoldability" type="java.lang.Integer" value="2" description="Determine whether ResultSets are closed or kept open when committing a transaction. The possible values are: 1 (HOLD_CURSORS_OVER_COMMIT), 2 (CLOSE_CURSORS_AT_COMMIT)." required="false"/>
+        <resourceProperties name="currentPackageSet" type="java.lang.String" value="" description="This property is used in conjunction with the DB2Binder - collection option which is given when the JDBC/CLI packageset is bound during installation by the DBA." required="false"/>
+        <resourceProperties name="readOnly" type="java.lang.Boolean" value="false" description="This property creates a read only connection. By default this value is false." required="false"/>
+        <resourceProperties name="deferPrepares" type="java.lang.Boolean" value="true" description="This property provides a performance directive that affects the internal semantics of the input data type conversion capability of the driver. By default the Universal driver defers 'internal prepare requests'. In this case, the driver works without the benefit of described parameter or result set meta data until execute time. So undescsribed input data is sent 'as is' to the server without any data type cross-conversation of the inputs." required="false"/>
+        <resourceProperties name="currentSchema" type="java.lang.String" value="" description="Identifies the default schema name used to qualify unqualified database object references where applicable in dynamically prepared SQL statements. Unless currentSchema is used, the default schema name is the authorization id of the current session user." required="false"/>
+        <resourceProperties name="cliSchema" type="java.lang.String" value="" description="Indicates the schema of the DB2 shadow catalog tables or views to search when you issue a database meta data catalog query." required="false"/>
+        <resourceProperties name="retrieveMessagesFromServerOnGetMessage" type="java.lang.Boolean" value="true" description="Directs all calls to the standard JDBC SQLException.getMessage() to invoke a server-side stored procedure which retrieves the readable message text for the error." required="false"/>
+        <resourceProperties name="clientAccountingInformation" type="java.lang.String" value="" description="Specifies accounting information for the current client for the connection. This information is for client accounting purposes. This value can change during a connection. For a DB2 UDB for Linux, UNIX and Windows server, the maximum length is 255 bytes. A Java empty string is valid for this value, but a Java null value is not valid." required="false"/>
+        <resourceProperties name="clientApplicationInformation" type="java.lang.String" value="" description="Specifies application information for the current client for the connection. This information is for client accounting purposes. This value can change during a connection. For a DB2 UDB for Linux, UNIX and Windows server, the maximum length is 255 bytes. A Java empty string is valid for this value, but a Java null value is not valid." required="false"/>
+        <resourceProperties name="clientUser" type="java.lang.String" value="" description="Specifies the current client user name for the connection. This information is for client accounting purposes. Unlike the JDBC connection user name, this value can change during a connection. For a DB2 UDB for Linux, UNIX and Windows server, the maximum length is 255 bytes." required="false"/>
+        <resourceProperties name="clientWorkstation" type="java.lang.String" value="" description="Specifies the workstation name for the current client for the connection. This information is for client accounting purposes. This value can change during a connection. For a DB2 UDB for Linux, UNIX and Windows server, the maximum length is 255 bytes. A Java empty string is valid for this value, but a Java null value is not valid." required="false"/>
+        <resourceProperties name="currentPackagePath" type="java.lang.String" value="" description="Specifies a comma-separated list of collections on the server. If this property is specified, the currentPackageSet property is ignored." required="false"/>
+        <resourceProperties name="currentSQLID" type="java.lang.String" value="" description="Specifies the default schema name that is used to qualify unqualified database objects in dynamically prepared SQL statements. This value of this property sets the value in the CURRENT SQLID special register on a DB2 UDB for OS/390 or z/OS server. If the currentSQLID property is not set, the default schema name is the value in the CURRENT SQLID special register." required="false"/>
+        <resourceProperties name="kerberosServerPrincipal" type="java.lang.String" value="" description="For a data source that uses Kerberos security, specifies the name that is used for the data source when it is registered with the Kerberos Key Distribution Center (KDC).  It should be of the format user@realm." required="false"/>
+        <resourceProperties name="loginTimeout" type="java.lang.Integer" value="0" description="The maximum time in seconds to wait for the DataSource object to connect to a data source. A value of 0 means that the timeout value is the default system timeout value. " required="false"/>
+        <resourceProperties name="securityMechanism" type="java.lang.Integer" value="" description="Specifies the DRDA security mechanism. Possible values are: 3 (CLEAR_TEXT_PASSWORD_SECURITY), 4 (USER_ONLY_SECURITY), 7 (ENCRYPTED_PASSWORD_SECURITY), 9 (ENCRYPTED_USER_AND_PASSWORD_SECURITY), or 11 (KERBEROS_SECURITY). Plesae refer to DB2 manual for the constant value. If this property is specified, the specified security mechanism is the only mechanism that is used. If no value is specified for this property, 3 is used." required="false"/>
+        <resourceProperties name="traceFileAppend" type="java.lang.Boolean" value="false" description="Specifies whether to append to or overwrite the file that is specified by the traceFile property. The default is false, which means that the file that is specified by the traceFile property is overwritten." required="false"/>
+        <resourceProperties name="currentFunctionPath" type="java.lang.String" value="" description="Specifies the value for the CURRENT FUNCTION PATH special register of the DB2 server." required="false"/>
+        <resourceProperties name="cursorSensitivity" type="java.lang.Integer" value="" description="Specifies whether java.sql.ResultSet.TYPE_SCROLL_SENSITIVE maps to sensitive dynamic or sensitive static scroll. This property is ignored for insensitive scrollable cursors. The default is 0 (TYPE_SCROLL_SENSITIVE_STATIC). Alternatively, it can be set to 1 (TYPE_SCROLL_SENSITIVE_DYNAMIC) to have TYPE_SCROLL_SENSITIVE cursors map to sensitive dynamic cursors or set to 2 (TYPE_SCROLL_ASENSITIVE) to use SENSITIVE whenever possible, otherwise, fallback to INSENSITIVE when the request doesn't support SENSITIVE." required="false"/>
+        <resourceProperties name="keepDynamic" type="java.lang.Integer" value="" description="Determines whether DB2 keeps dynamic SQL statements after commit points. This is applicable only when the target server is DB2 for z/OS. The property default depends on the server. Specifying 1 means YES, DB2 keeps dynamic SQL statements after commit points. Specifying 2 means NO, DB2 does not keep dynamic SQL statements after commit points. If this property is not set defaults are assumed. If the JDBC package set is custom bound without these defaults, this property must be set. The driver has no way to know how custom JDBC packages were bound under current DRDA architecture. This property is not a directive to server, but rather a driver directive." required="false"/>
+        <resourceProperties name="currentLockTimeout" type="java.lang.Integer" value="" description="Directive to DB2 servers to either wait indefinitely for a lock or to wait for a certain amount of time for a lock when the lock cannot be obtained immediately. A value of zero means no wait. A value of -1 means to wait indefinitely. A positive integer indicates the number of seconds to wait for a lock." required="false"/>
+        <resourceProperties name="enableMultithreadedAccessDetection" type="java.lang.Boolean" value="false" description="Indicates whether or not to detect multithreaded access to a Connection and its corresponding Statements, ResultSets, and MetaDatas." required="false"/>
+        <resourceProperties name="reauthentication" type="java.lang.Boolean" value="false" description="Specifies whether to allow reauthentication of connections.  This option requires implementation of the doConnectionSetupPerTransaction() method on the DataStoreHelper where the reauthentication is expected to take place." required="false"/>
+        <resourceProperties name="preTestSQLString" type="java.lang.String" value="SELECT 1 FROM TABLE1" description="This SQL statement is used for pre-test connection function. For example, SELECT 1 FROM [TESTTABLE]. If pre-testing of connection is enabled for the connection pool, this SQL statement will be executed to the connection to make sure the connection is good. If you leave this field blank, the default SQL statement, SELECT 1 FROM TABLE1, will be used at runtime. This will slow down the execution because of the exception handling if table TABLE1 is not defined in the database. Users are recommended to provide their own SQL statement to improve the performance." required="false"/>
+        <resourceProperties name="dbFailOverEnabled" type="java.lang.Boolean" value="false" description="This flag should be set to true only if the backend database is configured with failover capability.  This flag will indicate to WebSphere to validate connections when they first get created and to keep trying to get a good connection from the database when the validation fails." required="false"/>
+        <resourceProperties name="connRetriesDuringDBFailover" type="java.lang.Integer" value="100" description="This is useful only if dbFailOverEnabled flag is true.  This property controls how many times WebSphere will try to get a connection from the database before giving up" required="false"/>
+        <resourceProperties name="connRetryIntervalDuringDBFailover" type="java.lang.Long" value="3000" description="This is useful only if dbFailOverEnabled flag is true.  This property controls the interval between retries to retrieve a connection from the database." required="false"/>
+      </propertySet>
+      <connectionPool connectionTimeout="180" maxConnections="10" minConnections="0" reapTime="180" unusedTimeout="1800" agedTimeout="0" purgePolicy="EntirePool"/>
+      <mapping mappingConfigAlias="" authDataAlias=""/>
+    </factories>
+  </resources.jdbc:JDBCProvider>
+  <resources.jdbc:JDBCProvider name="DB2 Universal JDBC Driver Provider" description="Non-XA DB2 Universal JDBC Driver-compliant Provider.   Datasources created under this provider support only 1-phase commit processing except in the case where driver type 2 is used under WAS z/OS. On WAS z/OS, driver type 2   uses RRS and supports 2-phase commit processing" providerType="DB2 Universal JDBC Driver Provider" implementationClassName="com.ibm.db2.jcc.DB2ConnectionPoolDataSource" xa="false">
+    <classpath>${DB2UNIVERSAL_JDBC_DRIVER_PATH}/db2jcc.jar</classpath>
+    <classpath>${UNIVERSAL_JDBC_DRIVER_PATH}/db2jcc_license_cu.jar</classpath>
+    <classpath>${DB2UNIVERSAL_JDBC_DRIVER_PATH}/db2jcc_license_cisuz.jar</classpath>
+    <nativepath>${DB2UNIVERSAL_JDBC_DRIVER_NATIVEPATH}</nativepath>
+    <factories xmi:type="resources.jdbc:DataSource" name="STTEST" jndiName="jdbc/db2db" description="DB2 Universal Driver Datasource" providerType="DB2 Universal JDBC Driver Provider" authMechanismPreference="BASIC_PASSWORD" authDataAlias="w60int01mgr/sttest" relationalResourceAdapter="builtin_rra" statementCacheSize="10" datasourceHelperClassname="com.ibm.websphere.rsadapter.DB2UniversalDataStoreHelper">
+      <propertySet>
+        <resourceProperties name="databaseName" type="java.lang.String" value="sttest" description="This is a required property. This is an actual database name, and its not the locally catalogued database name. The Universal JDBC Driver does not rely on information catalogued in the DB2 database directory." required="true"/>
+        <resourceProperties name="driverType" type="java.lang.Integer" value="4" description="The JDBC connectivity-type of a data source. If you want to use type 4 driver, set the value to 4. If you want to use type 2 driver, set the value to 2. On WAS z/OS, driverType 2 uses RRS and supports 2-phase commit processing." required="true"/>
+        <resourceProperties name="serverName" type="java.lang.String" value="sttest" description="The TCP/IP address or host name for the DRDA server. If custom property driverType is set to 4, this property is required." required="false"/>
+        <resourceProperties name="portNumber" type="java.lang.Integer" value="60112" description="The TCP/IP port number where the DRDA server resides. If custom property driverType is set to 4, this property is required." required="false"/>
+        <resourceProperties name="description" type="java.lang.String" value="" description="The description of this datasource." required="false"/>
+        <resourceProperties name="traceLevel" type="java.lang.Integer" value="" description="The DB2 trace level for logging to the logWriter or trace file. Possible trace levels are: TRACE_NONE = 0,TRACE_CONNECTION_CALLS = 1,TRACE_STATEMENT_CALLS = 2,TRACE_RESULT_SET_CALLS = 4,TRACE_DRIVER_CONFIGURATION = 16,TRACE_CONNECTS = 32,TRACE_DRDA_FLOWS = 64,TRACE_RESULT_SET_META_DATA = 128,TRACE_PARAMETER_META_DATA = 256,TRACE_DIAGNOSTICS = 512,TRACE_SQLJ = 1024,TRACE_ALL = -1, ." required="false"/>
+        <resourceProperties name="traceFile" type="java.lang.String" value="" description="The trace file to store the trace output. If you specify the trace file, the DB2 Jcc trace will be logged in this trace file. If this property is not specified and the WAS.database trace group is enabled, then both WebSphere trace and DB2 trace will be logged into the WebSphere trace file." required="false"/>
+        <resourceProperties name="fullyMaterializeLobData" type="java.lang.Boolean" value="true" description="This setting controls whether or not LOB locators are used to fetch LOB data. If enabled, LOB data is not streamed, but is fully materialized with locators when the user requests a stream on the LOB column. The default value is true." required="false"/>
+        <resourceProperties name="resultSetHoldability" type="java.lang.Integer" value="2" description="Determine whether ResultSets are closed or kept open when committing a transaction. The possible values are: 1 (HOLD_CURSORS_OVER_COMMIT), 2 (CLOSE_CURSORS_AT_COMMIT)." required="false"/>
+        <resourceProperties name="currentPackageSet" type="java.lang.String" value="" description="This property is used in conjunction with the DB2Binder - collection option which is given when the JDBC/CLI packageset is bound during installation by the DBA." required="false"/>
+        <resourceProperties name="readOnly" type="java.lang.Boolean" value="false" description="This property creates a read only connection. By default this value is false." required="false"/>
+        <resourceProperties name="deferPrepares" type="java.lang.Boolean" value="true" description="This property provides a performance directive that affects the internal semantics of the input data type conversion capability of the driver. By default the Universal driver defers 'internal prepare requests'. In this case, the driver works without the benefit of described parameter or result set meta data until execute time. So undescsribed input data is sent 'as is' to the server without any data type cross-conversation of the inputs." required="false"/>
+        <resourceProperties name="currentSchema" type="java.lang.String" value="" description="Identifies the default schema name used to qualify unqualified database object references where applicable in dynamically prepared SQL statements. Unless currentSchema is used, the default schema name is the authorization id of the current session user." required="false"/>
+        <resourceProperties name="cliSchema" type="java.lang.String" value="" description="Indicates the schema of the DB2 shadow catalog tables or views to search when you issue a database meta data catalog query." required="false"/>
+        <resourceProperties name="retrieveMessagesFromServerOnGetMessage" type="java.lang.Boolean" value="true" description="Directs all calls to the standard JDBC SQLException.getMessage() to invoke a server-side stored procedure which retrieves the readable message text for the error." required="false"/>
+        <resourceProperties name="clientAccountingInformation" type="java.lang.String" value="" description="Specifies accounting information for the current client for the connection. This information is for client accounting purposes. This value can change during a connection. For a DB2 UDB for Linux, UNIX and Windows server, the maximum length is 255 bytes. A Java empty string is valid for this value, but a Java null value is not valid." required="false"/>
+        <resourceProperties name="clientApplicationInformation" type="java.lang.String" value="" description="Specifies application information for the current client for the connection. This information is for client accounting purposes. This value can change during a connection. For a DB2 UDB for Linux, UNIX and Windows server, the maximum length is 255 bytes. A Java empty string is valid for this value, but a Java null value is not valid." required="false"/>
+        <resourceProperties name="clientUser" type="java.lang.String" value="" description="Specifies the current client user name for the connection. This information is for client accounting purposes. Unlike the JDBC connection user name, this value can change during a connection. For a DB2 UDB for Linux, UNIX and Windows server, the maximum length is 255 bytes." required="false"/>
+        <resourceProperties name="clientWorkstation" type="java.lang.String" value="" description="Specifies the workstation name for the current client for the connection. This information is for client accounting purposes. This value can change during a connection. For a DB2 UDB for Linux, UNIX and Windows server, the maximum length is 255 bytes. A Java empty string is valid for this value, but a Java null value is not valid." required="false"/>
+        <resourceProperties name="currentPackagePath" type="java.lang.String" value="" description="Specifies a comma-separated list of collections on the server. If this property is specified, the currentPackageSet property is ignored." required="false"/>
+        <resourceProperties name="currentSQLID" type="java.lang.String" value="" description="Specifies the default schema name that is used to qualify unqualified database objects in dynamically prepared SQL statements. This value of this property sets the value in the CURRENT SQLID special register on a DB2 UDB for OS/390 or z/OS server. If the currentSQLID property is not set, the default schema name is the value in the CURRENT SQLID special register." required="false"/>
+        <resourceProperties name="kerberosServerPrincipal" type="java.lang.String" value="" description="For a data source that uses Kerberos security, specifies the name that is used for the data source when it is registered with the Kerberos Key Distribution Center (KDC). It should be of the format user@realm." required="false"/>
+        <resourceProperties name="loginTimeout" type="java.lang.Integer" value="0" description="The maximum time in seconds to wait for the DataSource object to connect to a data source. A value of 0 means that the timeout value is the default system timeout value. " required="false"/>
+        <resourceProperties name="securityMechanism" type="java.lang.Integer" value="" description="Specifies the DRDA security mechanism. Possible values are: 3 (CLEAR_TEXT_PASSWORD_SECURITY), 4 (USER_ONLY_SECURITY), 7 (ENCRYPTED_PASSWORD_SECURITY), 9 (ENCRYPTED_USER_AND_PASSWORD_SECURITY), or 11 (KERBEROS_SECURITY). Plesae refer to DB2 manual for the constant value. If this property is specified, the specified security mechanism is the only mechanism that is used. If no value is specified for this property, 3 is used." required="false"/>
+        <resourceProperties name="traceFileAppend" type="java.lang.Boolean" value="false" description="Specifies whether to append to or overwrite the file that is specified by the traceFile property. The default is false, which means that the file that is specified by the traceFile property is overwritten." required="false"/>
+        <resourceProperties name="currentFunctionPath" type="java.lang.String" value="" description="Specifies the value for the CURRENT FUNCTION PATH special register of the DB2 server." required="false"/>
+        <resourceProperties name="cursorSensitivity" type="java.lang.Integer" value="" description="Specifies whether java.sql.ResultSet.TYPE_SCROLL_SENSITIVE maps to sensitive dynamic or sensitive static scroll. This property is ignored for insensitive scrollable cursors. The default is 0 (TYPE_SCROLL_SENSITIVE_STATIC). Alternatively, it can be set to 1 (TYPE_SCROLL_SENSITIVE_DYNAMIC) to have TYPE_SCROLL_SENSITIVE cursors map to sensitive dynamic cursors or set to 2 (TYPE_SCROLL_ASENSITIVE) to use SENSITIVE whenever possible, otherwise, fallback to INSENSITIVE when the request doesn't support SENSITIVE." required="false"/>
+        <resourceProperties name="keepDynamic" type="java.lang.Integer" value="" description="Determines whether DB2 keeps dynamic SQL statements after commit points. This is applicable only when the target server is DB2 for z/OS. The property default depends on the server. Specifying 1 means YES, DB2 keeps dynamic SQL statements after commit points. Specifying 2 means NO, DB2 does not keep dynamic SQL statements after commit points. If this property is not set defaults are assumed. If the JDBC package set is custom bound without these defaults, this property must be set. The driver has no way to know how custom JDBC packages were bound under current DRDA architecture. This property is not a directive to server, but rather a driver directive." required="false"/>
+        <resourceProperties name="currentLockTimeout" type="java.lang.Integer" value="" description="Directive to DB2 servers to either wait indefinitely for a lock or to wait for a certain amount of time for a lock when the lock cannot be obtained immediately. A value of zero means no wait. A value of -1 means to wait indefinitely. A positive integer indicates the number of seconds to wait for a lock." required="false"/>
+        <resourceProperties name="enableMultithreadedAccessDetection" type="java.lang.Boolean" value="false" description="Indicates whether or not to detect multithreaded access to a Connection and its corresponding Statements, ResultSets, and MetaDatas." required="false"/>
+        <resourceProperties name="reauthentication" type="java.lang.Boolean" value="false" description="Specifies whether to allow reauthentication of connections.  This option requires implementation of the doConnectionSetupPerTransaction() method on the DataStoreHelper where the reauthentication is expected to take place." required="false"/>
+        <resourceProperties name="jmsOnePhaseOptimization" type="java.lang.Boolean" value="false" description="Specifies whether to allow JMS to get optimized connections from this datasource.  This option will prevent JDBC Applications from getting connections." required="false"/>
+        <resourceProperties name="preTestSQLString" type="java.lang.String" value="SELECT 1 FROM TABLE1" description="This SQL statement is used for pre-test connection function. For example, SELECT 1 FROM [TESTTABLE]. If pre-testing of connection is enabled for the connection pool, this SQL statement will be executed to the connection to make sure the connection is good. If you leave this field blank, the default SQL statement, SELECT 1 FROM TABLE1, will be used at runtime. This will slow down the execution because of the exception handling if table TABLE1 is not defined in the database. Users are recommended to provide their own SQL statement to improve the performance." required="false"/>
+        <resourceProperties name="dbFailOverEnabled" type="java.lang.Boolean" value="false" description="This flag should be set to true only if the backend database is configured with failover capability.  This flag will indicate to WebSphere to validate connections when they first get created and to keep trying to get a good connection from the database when the validation fails." required="false"/>
+        <resourceProperties name="connRetriesDuringDBFailover" type="java.lang.Integer" value="100" description="This is useful only if dbFailOverEnabled flag is true.  This property controls how many times WebSphere will try to get a connection from the database before giving up" required="false"/>
+        <resourceProperties name="connRetryIntervalDuringDBFailover" type="java.lang.Long" value="3000" description="This is useful only if dbFailOverEnabled flag is true.  This property controls the interval between retries to retrieve a connection from the database." required="false"/>
+      </propertySet>
+      <connectionPool connectionTimeout="180" maxConnections="10" minConnections="0" reapTime="180" unusedTimeout="1800" agedTimeout="0" purgePolicy="EntirePool"/>
+      <mapping mappingConfigAlias="" authDataAlias=""/>
+    </factories>
+  </resources.jdbc:JDBCProvider>
+  <resources.jdbc:JDBCProvider name="Oracle JDBC Driver" description="Oracle JDBC Driver" providerType="Oracle JDBC Driver" implementationClassName="oracle.jdbc.pool.OracleConnectionPoolDataSource" xa="false">
+    <classpath>${ORACLE_JDBC_DRIVER_PATH}/classes12.zip</classpath>
+    <factories xmi:type="resources.jdbc:DataSource" name="S52I_FAKT_W50" jndiName="jdbc/oradb" description="New JDBC Datasource" providerType="Oracle JDBC Driver" authMechanismPreference="BASIC_PASSWORD" authDataAlias="w60int01mgr/sttest_ora" relationalResourceAdapter="builtin_rra" statementCacheSize="10" datasourceHelperClassname="com.ibm.websphere.rsadapter.OracleDataStoreHelper">
+      <propertySet>
+        <resourceProperties name="driverType" type="java.lang.String" value="" description="The type of the driver. The possible values are: thin, oci8." required="false"/>
+        <resourceProperties name="oracleLogFileSizeLimit" type="java.lang.Integer" value="0" description="Oracle10g and beyond: The oracleLogFileSizeLimit specifies the maximum number of bytes to be written to any one file. Property is relevant only if trace file is specified. Default is unlimited" required="false"/>
+        <resourceProperties name="oracleLogFileCount" type="java.lang.Integer" value="1" description="Oracle10g and beyond: The oracleLogFileCount specifies the number of files to use. Property is relevant only if trace file is specified. Default is 1." required="false"/>
+        <resourceProperties name="oracleLogFileName" type="java.lang.String" value="" description="Oracle10g and beyond: The oracleLogFileName indicates which file to write the traces to" required="false"/>
+        <resourceProperties name="oracleLogTraceLevel" type="java.lang.String" value="INFO" description="Oracle10g and beyond: The oracleLogTraceLevel specifies which message levels will be logged .Default is INFO. Property is relevant only if trace file is specified.  Possible values from highest to lowest: SEVERE, WARNING, INFO, CONFIG, FINE, FINER ,FINEST.  Note that each value includes all above it, for example INFO includes SEVERE and WARNING" required="false"/>
+        <resourceProperties name="oracle9iLogTraceLevel" type="java.lang.String" value="2" description="Oracle9i and prior: The oracle9iLogTraceLevel specifies which message levels will be logged .Default is 2.  Possible values from highest to lowest 3, 2, 1" required="false"/>
+        <resourceProperties name="oracleLogFormat" type="java.lang.String" value="SimpleFormat" description="Oracle10g and beyond: The trace output format. Property is relevant only if trace file is specified. Default is SimpleFormat.  Possible values (SimpleFormat/ XMLFormat)" required="false"/>
+        <resourceProperties name="oracleLogPackageName" type="java.lang.String" value="oracle.jdbc.driver" description="Oracle10g and beyond: The Oracle package to trace. Default is oracle.jdbc.driver" required="false"/>
+        <resourceProperties name="TNSEntryName" type="java.lang.String" value="" description="The entry name which is used for the Oracle OCI driver." required="false"/>
+        <resourceProperties name="networkProtocol" type="java.lang.String" value="" description="Whether to use TCP/IP or IPC or any other protocol" required="false"/>
+        <resourceProperties name="databaseName" type="java.lang.String" value="" description="The database name. For example, enter sample to make your Data Source point to sample, used with thin driver" required="false"/>
+        <resourceProperties name="serverName" type="java.lang.String" value="" description="The name of the server, used with thin driver setup" required="false"/>
+        <resourceProperties name="portNumber" type="java.lang.Integer" value="1521" description="The TCP/IP port number where the jdbc driver resides. used with thin driver setup" required="false"/>
+        <resourceProperties name="dataSourceName" type="java.lang.String" value="" description="The name of the Data Source." required="false"/>
+        <resourceProperties name="URL" type="java.lang.String" value="jdbc:oracle:thin:@faktiw50:1526:s52" description="This is a required property. The URL indicating the database from which the Data Source will obtain connections, such as 'jdbc:oracle:thin:@localhost:1521:sample' for thin driver and 'jdbc:oracle:oci8:@sample' for thick driver." required="true"/>
+        <resourceProperties name="loginTimeout" type="java.lang.Integer" value="" description="The maximum time to attempt to connect a database. If this value is non-zero, attempt to connect to the database will timeout when this specified value is reached." required="false"/>
+        <resourceProperties name="description" type="java.lang.String" value="" description="The description of this datasource." required="false"/>
+        <resourceProperties name="enableMultithreadedAccessDetection" type="java.lang.Boolean" value="false" description="Indicates whether or not to detect multithreaded access to a Connection and its corresponding Statements, ResultSets, and MetaDatas." required="false"/>
+        <resourceProperties name="reauthentication" type="java.lang.Boolean" value="false" description="Specifies whether to allow reauthentication of connections.  This option requires implementation of the doConnectionSetupPerTransaction() method on the DataStoreHelper where the reauthentication is expected to take place." required="false"/>
+        <resourceProperties name="jmsOnePhaseOptimization" type="java.lang.Boolean" value="false" description="Specifies whether to allow JMS to get optimized connections from this datasource.  This option will prevent JDBC Applications from getting connections from this datasource." required="false"/>
+        <resourceProperties name="preTestSQLString" type="java.lang.String" value="SELECT 1 FROM DUAL" description="This SQL statement is used for pre-test connection function. For example, SELECT 1 FROM [TESTTABLE]. If pre-testing of connection is enabled for the connection pool, this SQL statement will be executed to the connection to make sure the connection is good. If you leave this field blank, the default SQL statement, SELECT 1 FROM TABLE1, will be used at runtime. This will slow down the execution because of the exception handling if table TABLE1 is not defined in the database. Users are recommended to provide their own SQL statement to improve the performance." required="false"/>
+        <resourceProperties name="dbFailOverEnabled" type="java.lang.Boolean" value="false" description="This flag should be set to true only if the backend database is configured with failover capability.  This flag will indicate to WebSphere to validate connections when they first get created and to keep trying to get a good connection from the database when the validation fails." required="false"/>
+        <resourceProperties name="connRetriesDuringDBFailover" type="java.lang.Integer" value="100" description="This is useful only if dbFailOverEnabled flag is true.  This property controls how many times WebSphere will try to get a connection from the database before giving up" required="false"/>
+        <resourceProperties name="connRetryIntervalDuringDBFailover" type="java.lang.Long" value="3000" description="This is useful only if dbFailOverEnabled flag is true.  This property controls the interval between retries to retrieve a connection from the database." required="false"/>
+      </propertySet>
+      <connectionPool connectionTimeout="180" maxConnections="10" minConnections="0" reapTime="180" unusedTimeout="1800" agedTimeout="0" purgePolicy="EntirePool"/>
+      <mapping mappingConfigAlias="" authDataAlias=""/>
+    </factories>
+  </resources.jdbc:JDBCProvider>
+  <resources.jdbc:JDBCProvider name="Oracle JDBC Driver (XA)" description="Oracle JDBC Driver (XA)" providerType="Oracle JDBC Driver (XA)" implementationClassName="oracle.jdbc.xa.client.OracleXADataSource" xa="true">
+    <classpath>${ORACLE_JDBC_DRIVER_PATH}/ojdbc14.jar</classpath>
+    <factories xmi:type="resources.jdbc:DataSource" name="S52I_FAKT_W50" jndiName="jdbc/oradb_xa" description="New JDBC Datasource" providerType="Oracle JDBC Driver (XA)" authMechanismPreference="BASIC_PASSWORD" authDataAlias="w60int01mgr/sttest_ora" xaRecoveryAuthAlias="w60int01mgr/sttest_ora" relationalResourceAdapter="builtin_rra" statementCacheSize="10" datasourceHelperClassname="com.ibm.websphere.rsadapter.OracleDataStoreHelper">
+      <propertySet>
+        <resourceProperties name="driverType" type="java.lang.String" value="" description="The type of the driver. The possible values are: thin, oci8." required="false"/>
+        <resourceProperties name="oracleLogFileSizeLimit" type="java.lang.Integer" value="0" description="Oracle10g and beyond: The oracleLogFileSizeLimit specifies the maximum number of bytes to be written to any one file.  Property is relevant only if trace file is specified. Default is unlimited" required="false"/>
+        <resourceProperties name="oracleLogFileCount" type="java.lang.Integer" value="1" description="Oracle10g and beyond: The oracleLogFileCount specifies the number of files to use.  Property is relevant only if trace file is specified. Default is 1." required="false"/>
+        <resourceProperties name="oracleLogFileName" type="java.lang.String" value="" description="Oracle10g and beyond: The oracleLogFileName indicates which file to write the traces to" required="false"/>
+        <resourceProperties name="oracleLogTraceLevel" type="java.lang.String" value="INFO" description="Oracle10g and beyond: The oracleLogTraceLevel specifies which message levels will be logged .Default is INFO. Property is relevant only if trace file is specified.  Possible values from highest to lowest: SEVERE, WARNING, INFO, CONFIG, FINE, FINER ,FINEST.  Note that each value includes all above it, for example INFO includes SEVERE and WARNING" required="false"/>
+        <resourceProperties name="oracle9iLogTraceLevel" type="java.lang.String" value="2" description="Oracle9i and prior: The oracle9iLogTraceLevel specifies which message levels will be logged .Default is 2.  Possible values from highest to lowest 3, 2, 1" required="false"/>
+        <resourceProperties name="oracleLogFormat" type="java.lang.String" value="SimpleFormat" description="Oracle10g and beyond: The trace output format. Default is SimpleFormat.  Property is relevant only if trace file is specified. Possible values (SimpleFormat/ XMLFormat)" required="false"/>
+        <resourceProperties name="oracleLogPackageName" type="java.lang.String" value="oracle.jdbc.driver" description="Oracle10g and beyond: The Oracle package to trace. Default is oracle.jdbc.driver" required="false"/>
+        <resourceProperties name="TNSEntryName" type="java.lang.String" value="" description="The entry name which is used for the Oracle OCI driver." required="false"/>
+        <resourceProperties name="networkProtocol" type="java.lang.String" value="" description="Whether to use TCP/IP or IPC or any other protocol" required="false"/>
+        <resourceProperties name="databaseName" type="java.lang.String" value="" description="The database name. For example, enter sample to make your Data Source point to sample.  used for thin driver setup" required="false"/>
+        <resourceProperties name="serverName" type="java.lang.String" value="" description="The name of the server. used for thin driver setup" required="false"/>
+        <resourceProperties name="portNumber" type="java.lang.Integer" value="1521" description="The TCP/IP port number where the jdbc driver resides. used for thin driver setup" required="false"/>
+        <resourceProperties name="dataSourceName" type="java.lang.String" value="" description="The name of the Data Source." required="false"/>
+        <resourceProperties name="URL" type="java.lang.String" value="jdbc:oracle:thin:@faktiw50:1526:s52" description="This is a required property. The URL indicating the database from which the Data Source will obtain connections, such as 'jdbc:oracle:thin:@localhost:1521:sample' for thin driver and 'jdbc:oracle:oci8:@sample' for thick driver." required="true"/>
+        <resourceProperties name="loginTimeout" type="java.lang.Integer" value="" description="The maximum time to attempt to connect a database. If this value is non-zero, attempt to connect to the database will timeout when this specified value is reached." required="false"/>
+        <resourceProperties name="description" type="java.lang.String" value="" description="The description of this datasource." required="false"/>
+        <resourceProperties name="transactionBranchesLooselyCoupled" type="java.lang.Boolean" value="false" description="This property is introduced as a result of Oraclebug 2511780, Oracle Patch for 2511780 must be installed before setting this property to true, failure to do that would cause a program error.  Please check the WebSphere readme file for more info ." required="false"/>
+        <resourceProperties name="enableMultithreadedAccessDetection" type="java.lang.Boolean" value="false" description="Indicates whether or not to detect multithreaded access to a Connection and its corresponding Statements, ResultSets, and MetaDatas." required="false"/>
+        <resourceProperties name="reauthentication" type="java.lang.Boolean" value="false" description="Specifies whether to allow reauthentication of connections.  This option requires implementation of the doConnectionSetupPerTransaction() method on the DataStoreHelper where the reauthentication is expected to take place." required="false"/>
+        <resourceProperties name="preTestSQLString" type="java.lang.String" value="SELECT 1 FROM DUAL" description="This SQL statement is used for pre-test connection function. For example, SELECT 1 FROM [TESTTABLE]. If pre-testing of connection is enabled for the connection pool, this SQL statement will be executed to the connection to make sure the connection is good. If you leave this field blank, the default SQL statement, SELECT 1 FROM TABLE1, will be used at runtime. This will slow down the execution because of the exception handling if table TABLE1 is not defined in the database. Users are recommended to provide their own SQL statement to improve the performance." required="false"/>
+        <resourceProperties name="dbFailOverEnabled" type="java.lang.Boolean" value="false" description="This flag should be set to true only if the backend database is configured with failover capability.  This flag will indicate to WebSphere to validate connections when they first get created and to keep trying to get a good connection from the database when the validation fails." required="false"/>
+        <resourceProperties name="connRetriesDuringDBFailover" type="java.lang.Integer" value="100" description="This is useful only if dbFailOverEnabled flag is true.  This property controls how many times WebSphere will try to get a connection from the database before giving up" required="false"/>
+        <resourceProperties name="connRetryIntervalDuringDBFailover" type="java.lang.Long" value="3000" description="This is useful only if dbFailOverEnabled flag is true.  This property controls the interval between retries to retrieve a connection from the database." required="false"/>
+      </propertySet>
+      <connectionPool connectionTimeout="180" maxConnections="10" minConnections="0" reapTime="180" unusedTimeout="1800" agedTimeout="0" purgePolicy="EntirePool" testConnection="false" testConnectionInterval="0"/>
+      <mapping mappingConfigAlias="" authDataAlias=""/>
+    </factories>
+  </resources.jdbc:JDBCProvider>
+  <resources.jdbc:JDBCProvider name="Cloudscape JDBC Provider" description="Cloudscape JDBC Provider" providerType="Cloudscape JDBC Provider" implementationClassName="com.ibm.db2j.jdbc.DB2jConnectionPoolDataSource" xa="false">
+    <classpath>${CLOUDSCAPE_JDBC_DRIVER_PATH}/db2j.jar</classpath>
+    <factories xmi:type="resources.jdbc:DataSource" name="_w60int01n01.STEST_Server-E050_WAS6_INT01_B1" jndiName="jdbc/com.ibm.ws.sib/w60int01n01.STEST_Server-E050_WAS6_INT01_B1" description="Default Datasource for SIB" authMechanismPreference="BASIC_PASSWORD" relationalResourceAdapter="builtin_rra" statementCacheSize="40" datasourceHelperClassname="com.ibm.websphere.rsadapter.CloudscapeDataStoreHelper">
+      <propertySet>
+        <resourceProperties name="databaseName" type="java.lang.String" value="${USER_INSTALL_ROOT}/databases/com.ibm.ws.sib/w60int01n01.STEST_Server-E050_WAS6_INT01_B1" description="Location of default Cloudscape XA database"/>
+        <resourceProperties name="shutdownDatabase" type="java.lang.String" value=""/>
+        <resourceProperties name="dataSourceName" type="java.lang.String" value=""/>
+        <resourceProperties name="description" type="java.lang.String" value=""/>
+        <resourceProperties name="connectionAttributes" type="java.lang.String" value="upgrade=true"/>
+        <resourceProperties name="createDatabase" type="java.lang.String" value="create"/>
+      </propertySet>
+      <connectionPool connectionTimeout="180" maxConnections="50" minConnections="0" reapTime="180" unusedTimeout="1800" agedTimeout="0" purgePolicy="EntirePool" numberOfSharedPoolPartitions="0" numberOfUnsharedPoolPartitions="0" numberOfFreePoolPartitions="0" freePoolDistributionTableSize="0" surgeThreshold="-1" surgeCreationInterval="0" testConnection="false" testConnectionInterval="0" stuckTimerTime="0" stuckTime="0" stuckThreshold="0"/>
+    </factories>
+  </resources.jdbc:JDBCProvider>
+  <resources.jdbc:JDBCProvider name="Sybase JDBC Driver (XA)" description="Sybase JDBC Driver for two-phase commit (JTA/XA)" providerType="Sybase JDBC Driver (XA)" implementationClassName="com.sybase.jdbc2.jdbc.SybXADataSource" xa="true">
+    <classpath>${SYBASE_JDBC_DRIVER_PATH}/jconn2.jar</classpath>
+    <factories xmi:type="resources.jdbc:DataSource" name="MySybaseDataSource" jndiName="jdbc/ds2" description="New JDBC Datasource" providerType="Sybase JDBC Driver (XA)" authDataAlias="w60int01mgr/MyAlias" relationalResourceAdapter="builtin_rra" statementCacheSize="12" datasourceHelperClassname="com.ibm.websphere.rsadapter.SybaseDataStoreHelper">
+      <propertySet>
+        <resourceProperties name="databaseName" type="java.lang.String" value="dbname2" description="This is a required property. The database name. For example, enter sample to make your Data Source point to sample" required="true"/>
+        <resourceProperties name="serverName" type="java.lang.String" value="dbserver2" description="This is a required property. The name of the server where Sybase resides." required="true"/>
+        <resourceProperties name="portNumber" type="java.lang.Integer" value="12345" description="This is a required property. The TCP/IP port number where the jdbc driver resides." required="true"/>
+        <resourceProperties name="networkProtocol" type="java.lang.String" value="" description="Specifies the protocol to be used. When set to socket, SSL encryption is not used. The possible values are: socket, SSL. Default is socket." required="false"/>
+        <resourceProperties name="dataSourceName" type="java.lang.String" value="" description="The name of the Data Source." required="false"/>
+        <resourceProperties name="version" type="java.lang.Integer" value="" description="The version of the driver." required="false"/>
+        <resourceProperties name="resourceManagerName" type="java.lang.String" value="" description="The resource manager name." required="false"/>
+        <resourceProperties name="loginTimeout" type="java.lang.Integer" value="" description="The maximum time to attempt to connect a database. If this value is non-zero, attempt to connect to the database will timeout when this specified value is reached." required="false"/>
+        <resourceProperties name="description" type="java.lang.String" value="" description="The description of this datasource." required="false"/>
+        <resourceProperties name="connectionProperties" type="java.lang.String" value="SELECT_OPENS_CURSOR=true" description="The properties that are needed for connection. Please refer to Sybase documentation for the appropriate properties." required="false"/>
+        <resourceProperties name="enableMultithreadedAccessDetection" type="java.lang.Boolean" value="false" description="Indicates whether or not to detect multithreaded access to a Connection and its corresponding Statements, ResultSets, and MetaDatas." required="false"/>
+        <resourceProperties name="reauthentication" type="java.lang.Boolean" value="false" description="Specifies whether to allow reauthentication of connections.  This option requires implementation of the doConnectionSetupPerTransaction() method on the DataStoreHelper where the reauthentication is expected to take place." required="false"/>
+        <resourceProperties name="preTestSQLString" type="java.lang.String" value="SELECT 1 FROM TABLE1" description="This SQL statement is used for pre-test connection function. For example, SELECT 1 FROM [TESTTABLE]. If pre-testing of connection is enabled for the connection pool, this SQL statement will be executed to the connection to make sure the connection is good. If you leave this field blank, the default SQL statement, SELECT 1 FROM TABLE1, will be used at runtime. This will slow down the execution because of the exception handling if table TABLE1 is not defined in the database. Users are recommended to provide their own SQL statement to improve the performance." required="false"/>
+        <resourceProperties name="dbFailOverEnabled" type="java.lang.Boolean" value="false" description="This flag should be set to true only if the backend database is configured with failover capability.  This flag will indicate to WebSphere to validate connections when they first get created and to keep trying to get a good connection from the database when the validation fails." required="false"/>
+        <resourceProperties name="connRetriesDuringDBFailover" type="java.lang.Integer" value="100" description="This is useful only if dbFailOverEnabled flag is true.  This property controls how many times WebSphere will try to get a connection from the database before giving up" required="false"/>
+        <resourceProperties name="connRetryIntervalDuringDBFailover" type="java.lang.Long" value="3000" description="This is useful only if dbFailOverEnabled flag is true.  This property controls the interval between retries to retrieve a connection from the database." required="false"/>
+      </propertySet>
+      <connectionPool connectionTimeout="23" maxConnections="45" minConnections="0"/>
+    </factories>
+  </resources.jdbc:JDBCProvider>
+</xmi:XMI>

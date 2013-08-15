@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<process:Server xmlns:process="http://www.ibm.com/websphere/appserver/schemas/5.0/process.xmi" xmlns:xmi="http://www.omg.org/XMI" xmlns:adminservice="http://www.ibm.com/websphere/appserver/schemas/5.0/adminservice.xmi" xmlns:applicationserver="http://www.ibm.com/websphere/appserver/schemas/5.0/applicationserver.xmi" xmlns:applicationserver.ejbcontainer="http://www.ibm.com/websphere/appserver/schemas/5.0/applicationserver.ejbcontainer.xmi" xmlns:applicationserver.ejbcontainer.messagelistener="http://www.ibm.com/websphere/appserver/schemas/5.0/applicationserver.ejbcontainer.messagelistener.xmi" xmlns:applicationserver.webcontainer="http://www.ibm.com/websphere/appserver/schemas/5.0/applicationserver.webcontainer.xmi" xmlns:channelservice="http://www.ibm.com/websphere/appserver/schemas/6.0/channelservice.xmi" xmlns:channelservice.channels="http://www.ibm.com/websphere/appserver/schemas/6.0/channelservice.channels.xmi" xmlns:coregroupbridgeservice="http://www.ibm.com/websphere/appserver/schemas/6.0/coregroupbridgeservice.xmi" xmlns:loggingservice.http="http://www.ibm.com/websphere/appserver/schemas/6.0/loggingservice.http.xmi" xmlns:loggingservice.ras="http://www.ibm.com/websphere/appserver/schemas/5.0/loggingservice.ras.xmi" xmlns:namingserver="http://www.ibm.com/websphere/appserver/schemas/5.0/namingserver.xmi" xmlns:orb="http://www.ibm.com/websphere/appserver/schemas/5.0/orb.xmi" xmlns:pmiservice="http://www.ibm.com/websphere/appserver/schemas/5.0/pmiservice.xmi" xmlns:processexec="http://www.ibm.com/websphere/appserver/schemas/5.0/processexec.xmi" xmlns:threadpoolmanager="http://www.ibm.com/websphere/appserver/schemas/6.0/threadpoolmanager.xmi" xmlns:tperfviewer="http://www.ibm.com/websphere/appserver/schemas/6.0/tperfviewer.xmi" xmlns:traceservice="http://www.ibm.com/websphere/appserver/schemas/5.0/traceservice.xmi" xmi:version="2.0" name="STEST_Server">
+<?xml version="1.0" encoding="UTF-8"?><process:Server xmlns:process="http://www.ibm.com/websphere/appserver/schemas/5.0/process.xmi" xmlns:xmi="http://www.omg.org/XMI" xmlns:adminservice="http://www.ibm.com/websphere/appserver/schemas/5.0/adminservice.xmi" xmlns:applicationserver="http://www.ibm.com/websphere/appserver/schemas/5.0/applicationserver.xmi" xmlns:applicationserver.ejbcontainer="http://www.ibm.com/websphere/appserver/schemas/5.0/applicationserver.ejbcontainer.xmi" xmlns:applicationserver.ejbcontainer.messagelistener="http://www.ibm.com/websphere/appserver/schemas/5.0/applicationserver.ejbcontainer.messagelistener.xmi" xmlns:applicationserver.webcontainer="http://www.ibm.com/websphere/appserver/schemas/5.0/applicationserver.webcontainer.xmi" xmlns:channelservice="http://www.ibm.com/websphere/appserver/schemas/6.0/channelservice.xmi" xmlns:channelservice.channels="http://www.ibm.com/websphere/appserver/schemas/6.0/channelservice.channels.xmi" xmlns:coregroupbridgeservice="http://www.ibm.com/websphere/appserver/schemas/6.0/coregroupbridgeservice.xmi" xmlns:loggingservice.http="http://www.ibm.com/websphere/appserver/schemas/6.0/loggingservice.http.xmi" xmlns:loggingservice.ras="http://www.ibm.com/websphere/appserver/schemas/5.0/loggingservice.ras.xmi" xmlns:namingserver="http://www.ibm.com/websphere/appserver/schemas/5.0/namingserver.xmi" xmlns:orb="http://www.ibm.com/websphere/appserver/schemas/5.0/orb.xmi" xmlns:pmiservice="http://www.ibm.com/websphere/appserver/schemas/5.0/pmiservice.xmi" xmlns:processexec="http://www.ibm.com/websphere/appserver/schemas/5.0/processexec.xmi" xmlns:threadpoolmanager="http://www.ibm.com/websphere/appserver/schemas/6.0/threadpoolmanager.xmi" xmlns:tperfviewer="http://www.ibm.com/websphere/appserver/schemas/6.0/tperfviewer.xmi" xmlns:traceservice="http://www.ibm.com/websphere/appserver/schemas/5.0/traceservice.xmi" xmi:version="2.0" name="STEST_Server">
   <stateManagement initialState="START"/>
   <statisticsProvider specification="com.ibm.orb=enabled"/>
   <services xmi:type="pmiservice:PMIService" enable="true" initialSpecLevel="" statisticSet="basic" synchronizedUpdate="false"/>
@@ -131,10 +130,11 @@
   <components xmi:type="applicationserver:ApplicationServer" name="STEST_Server" applicationClassLoaderPolicy="MULTIPLE">
     <stateManagement initialState="START"/>
     <services xmi:type="applicationserver:TransactionService" enable="true" transactionLogDirectory="${SERVER_ROOT}/tranlog" totalTranLifetimeTimeout="120" clientInactivityTimeout="60"/>
-    <services xmi:type="applicationserver:DynamicCache" enable="true">
+    <services xmi:type="applicationserver:DynamicCache" enable="true" defaultPriority="1" hashSize="0" cacheSize="2000" enableCacheReplication="true" replicationType="PUSH_PULL" pushFrequency="0" enableDiskOffload="false" flushToDiskOnStop="false">
       <cacheGroups name="EsiInvalidator">
         <members address="localhost" adapterBeanName="com.ibm.websphere.servlet.cache.ESIInvalidatorServlet"/>
       </cacheGroups>
+      <cacheReplication messageBrokerDomainName="STEST_Cluster_full"/>
     </services>
     <components xmi:type="applicationserver.webcontainer:WebContainer" enableServletCaching="false">
       <stateManagement initialState="START"/>
@@ -149,10 +149,12 @@
     <components xmi:type="applicationserver.ejbcontainer:EJBContainer" passivationDirectory="${USER_INSTALL_ROOT}/temp" inactivePoolCleanupInterval="30000">
       <stateManagement initialState="START"/>
       <services xmi:type="applicationserver.ejbcontainer.messagelistener:MessageListenerService">
-        <listenerPorts name="listener1" connectionFactoryJNDIName="jms/wasXaTestFactory" destinationJNDIName="jms/wasXaTestQueue1" maxSessions="1" maxRetries="0" maxMessages="1">
+        <properties name="recovery.retry.interval" value="37" required="false"/>
+        <properties name="max.recovery.retries" value="7" required="false"/>
+        <listenerPorts name="listener1" connectionFactoryJNDIName="jms/wasXaTestFactory" destinationJNDIName="jms/wasXaTestQueue1" maxSessions="1" maxRetries="3" maxMessages="1">
           <stateManagement initialState="STOP"/>
         </listenerPorts>
-        <listenerPorts name="listener2" connectionFactoryJNDIName="jms/wasXaTestFactory" destinationJNDIName="jms/wasXaTestQueue2" maxSessions="1" maxRetries="0" maxMessages="1">
+        <listenerPorts name="listener2" connectionFactoryJNDIName="jms/wasXaTestFactory" destinationJNDIName="jms/wasXaTestQueue2" maxSessions="1" maxRetries="3" maxMessages="1">
           <stateManagement initialState="STOP"/>
         </listenerPorts>
         <threadPool minimumSize="10" maximumSize="50" inactivityTimeout="3500" isGrowable="false" name="Message.Listener.Pool"/>
@@ -160,16 +162,18 @@
       <cacheSettings cleanupInterval="3000" cacheSize="2053"/>
       <timerSettings datasourceJNDIName="jdbc/DefaultEJBTimerDataSource" tablePrefix="EJBTIMER_" pollInterval="300" numAlarmThreads="1"/>
     </components>
-    <webserverPluginSettings WaitForContinue="false" ConnectTimeout="0" MaxConnections="-1" ExtendedHandshake="false"/>
+    <webserverPluginSettings WaitForContinue="false" ConnectTimeout="20" MaxConnections="-1" ExtendedHandshake="false"/>
   </components>
   <processDefinitions xmi:type="processexec:JavaProcessDef" workingDirectory="${SERVER_ROOT}/work" executableTargetKind="JAVA_CLASS" executableTarget="com.ibm.ws.runtime.WsServer">
-    <execution processPriority="20" umask="002" runAsUser="stest" runAsGroup="wasas" runInProcessGroup="0"/>
+    <execution processPriority="20" umask="002" runAsUser="sttest" runAsGroup="wasas" runInProcessGroup="0"/>
     <ioRedirect stdoutFilename="${SERVER_ROOT}/work/logs/native_stdout.log" stderrFilename="${SERVER_ROOT}/work/logs/native_stderr.log"/>
-    <environment name="IBM_HEAPDUMP" value="true"/>
-    <environment name="IBM_HEAPDUMP_OUTOFMEMORY" value="false"/>
+    <environment name="JAVA_DUMP_OPTS" value="ONANYSIGNAL(JAVADUMP,HEAPDUMP),ONINTERRUPT(NONE),ONOUTOFMEMORY(JAVADUMP,HEAPDUMP[1])"/>
     <monitoringPolicy maximumStartupAttempts="3" pingInterval="60" pingTimeout="300" autoRestart="true" nodeRestartState="PREVIOUS"/>
-    <jvmEntries verboseModeClass="false" verboseModeGarbageCollection="true" verboseModeJNI="false" runHProf="false" hprofArguments="" debugMode="false" debugArgs="-Djava.compiler=NONE -Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=7777" genericJvmArguments="">
+    <jvmEntries verboseModeClass="false" verboseModeGarbageCollection="true" verboseModeJNI="false" runHProf="false" debugMode="false" debugArgs="-Djava.compiler=NONE -Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=7777" disableJIT="false">
       <systemProperties name="sun.net.inetaddr.ttl" value="60"/>
+      <systemProperties name="bind.address" value="53.190.19.230" required="false"/>
+      <systemProperties name="java.net.preferIPv4Stack" value="true" required="false"/>
+      <systemProperties name="disableAccTaskFromOtherApp" value="false" required="false"/>
     </jvmEntries>
   </processDefinitions>
 </process:Server>

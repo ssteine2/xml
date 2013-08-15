@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<cis:Mdg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cis="http://www.sbb.ch/schemas/cis/V1_2/rcsformationsmeldung">
+    <correlationid>CIS_2013-06-26-13.25.13.099460          </correlationid>
+    <counter>460</counter>
+    <orgcis>CIS_P </orgcis>
+    <orgrcs>
+    </orgrcs>
+    <ts>2013-06-26T13:25:13.099+02:00</ts>
+    <version>1.2</version>
+    <priority>01</priority>
+    <zuege>
+        <zid>
+            <zn>058072</zn>
+            <znSch>004</znSch>
+            <zZn>0</zZn>
+            <vTag>2013-06-26</vTag>
+        </zid>
+        <teilstrecken>
+            <zusatzcode>01</zusatzcode>
+            <wkeit>1</wkeit>
+            <dc>4100</dc>
+            <pdatab>2013-06-26T11:13:00</pdatab>
+            <pdatan>2013-06-26T11:20:00</pdatan>
+            <gloks>080</gloks>
+            <aloks>004</aloks>
+            <lloks>015</lloks>
+            <vmaxal>100</vmaxal>
+            <vmaxzug>100</vmaxzug>
+            <awal>007</awal>
+            <gal>0217</gal>
+            <aal>020</aal>
+            <ltot>0131</ltot>
+            <atot>024</atot>
+            <zr>D</zr>
+            <br>085</br>
+            <bv>092</bv>
+            <bbeschr>
+                <bcode>071</bcode>
+            </bbeschr>
+            <bbeschr>
+                <bcode>016</bcode>
+            </bbeschr>
+            <bbeschr>
+                <bcode>095</bcode>
+            </bbeschr>
+            <bbeschr>
+                <bcode>063</bcode>
+            </bbeschr>
+            <bbeschr>
+                <bcode>0

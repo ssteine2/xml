@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<installer xmlns:xsi="http://www.sbb.ch/websphere/installer">
+    <application
+        app_name="mct-admin-ear"
+        ear_classloader="PARENT_LAST"
+        ear_name="mct-admin-ear-7.2.2.0.1.ear"
+        starting_weight="1"
+        version="7.2.2.0.1"
+        war_classloader="MULTIPLE">
+        <modules>
+            <module
+                name="mct-at-client-web-cchelpdesk"
+                war="mct-at-client-web-cchelpdesk.war">
+                <mapping
+                    node=""
+                    server="intranet" />
+                <mapping
+                    node=""
+                    server="internet2" />
+            </module>
+            <module
+                name="mct-at-client-web-aav"
+                war="mct-at-client-web-aav.war">
+                <mapping
+                    node=""
+                    server="intranet" />
+                <mapping
+                    node=""
+                    server="internet2" />
+            </module>
+            <module
+                name="mct-at-client-web-ipsadmin"
+                war="mct-at-client-web-ipsadmin.war">
+                <mapping
+                    node=""
+                    server="intranet" />
+                <mapping
+                    node=""
+                    server="internet2" />
+            </module>
+            <module
+                name="mct-at-client-web-mctadmin"
+                war="mct-at-client-web-mctadmin.war">
+                <mapping
+                    node=""
+                    server="intranet" />
+                <mapping
+                    node=""
+                    server="internet2" />
+            </module>
+            <module
+                name="mct-at-client-web-useradmin"
+                war="mct-at-client-web-useradmin.war">
+                <mapping
+                    node=""
+                    server="intranet" />
+                <mapping
+                    node=""
+                    server="internet2" />
+            </module>
+            <module
+                name="mct-at-client-web-crplus"
+                war="mct-at-client-web-crplus.war">
+                <mapping
+                    node=""
+                    server="intranet" />
+                <mapping
+                    node=""
+                    server="internet2" />
+            </module>
+            <module
+                name="mct-at-client-web-b2p"
+                war="mct-at-client-web-b2p.war">
+                <mapping
+                    node=""
+                    server="intranet" />
+                <mapping
+                    node=""
+                    server="internet2" />
+            </module>
+            <module
+                name="mct-at-testclient-web-b2p"
+                war="mct-at-testclient-web-b2p.war">
+                <mapping
+                    node=""
+                    server="intranet" />
+                <mapping
+                    node=""
+                    server="internet2" />
+            </module>
+            <module
+                name="mct-at-client-web-gamo"
+                war="mct-at-client-web-gamo.war">
+                <mapping
+                    node=""
+                    server="intranet" />
+                <mapping
+                    node=""
+                    server="internet2" />
+            </module>
+        </modules>
+    </application>
+</installer>
